@@ -11,7 +11,6 @@ const logIn = (async (req, res) => {
             if (!user) {
                 res.status(401).json({ message: 'User does not exist' })
             }
-
             const isValid = bCrypt.compareSync(password, user.password)
             if (isValid) {
                 const token = jwt.sign(user._id.toString(),jwtSecret)

@@ -6,9 +6,13 @@ export const useHttp = () =>{
     const request = useCallback(async(url,method= 'GET',body = null,headers={})=>{
         SetLoading(true)
         try{
+            if(body){
+                body = JSON.stringify(body)
+                headers['Content-type'] = 'application/json'
+            }
             const responce = await fetch(url,{method,body,headers})
             const data = await responce.json()
-            if(responce.status!=200){
+            if(responce.status!==200){
                 throw new Error(data.message || 'smth went wrong')
             }
             SetLoading(false)
@@ -19,5 +23,8 @@ export const useHttp = () =>{
             throw e
         }
     },[])
-    return {loading,request,error}
+    const CleanErrors = ()=>{
+        SetError(null)
+    }
+    return {loading,request,error,CleanErrors}
 }

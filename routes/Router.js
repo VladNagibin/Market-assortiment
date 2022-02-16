@@ -14,8 +14,7 @@ router.post('/registration', (async (req, res) => {
     const user = new User({
         password: hashPassword,
         name: req.body.name,
-        mail: req.body.mail,
-        isAdmin: !!req.body.isAdmin
+        mail: req.body.email
     })
     await user.save()
     res.status(200).json({ message: 'user created' })
@@ -30,7 +29,7 @@ router.post('/out', ((req, res) => {
 
 router.get('/getProducts', (async (req, res) => {
     const { id } = req.query
-    api.getSection(id).then(
+    await api.getSection(id).then(
         result => {
             res.status(200).json({
                 message: 'success',
@@ -47,7 +46,7 @@ router.get('/getProducts', (async (req, res) => {
 
 router.get('/getCategory', (async (req, res) => {
     const { id } = req.query
-    Category.find({ "parentId": id }).lean().then(
+    await Category.find({ "parentId": id }).lean().then(
         result => {
             res.status(200).json({
                 message: 'success',
