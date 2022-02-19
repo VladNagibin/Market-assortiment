@@ -8,7 +8,7 @@ const app = express()
 
 app.use(express.json({extended:true}))
 //app.use(express.static(path.join(__dirname,'public')))
-app.use(Router)
+app.use('/api',Router)
 app.use(Cookies)
 
 async function start(){

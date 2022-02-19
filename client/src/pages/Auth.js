@@ -13,7 +13,7 @@ export default function Auth() {
     },[error,CleanErrors])
     const registerHandler = async () =>{
       try{
-        const data = await request('/registration',"POST",{...form})
+        const data = await request('/api/registration',"POST",{...form})
         console.log(data)
       }catch(e){
 
