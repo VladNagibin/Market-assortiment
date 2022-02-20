@@ -18,6 +18,7 @@ export const useHttp = () =>{
             SetLoading(false)
             return data
         }catch(e){
+            console.log(e.message)
             SetLoading(false)
             SetError(e.message)
             throw e

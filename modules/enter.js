@@ -14,10 +14,11 @@ const logIn = (async (req, res) => {
             const isValid = bCrypt.compareSync(password, user.password)
             if (isValid) {
                 const token = jwt.sign(user._id.toString(),jwtSecret)
-                res.cookie('UserHash',token.toString())
+                //res.cookie('UserHash',token.toString())
                 res.status(200).json({ 
                     message: 'success',
-                    'token':token    
+                    token:token,
+                    user_id:user._id   
                 })
                 //res.json({ token })
             }

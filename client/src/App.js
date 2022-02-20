@@ -1,5 +1,6 @@
 import { useRoutes } from "./Routes";
 import {BrowserRouter} from 'react-router-dom'
+import 'materialize-css'
 function App() { 
   const routes = useRoutes(false)
   return (
