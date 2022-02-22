@@ -11,7 +11,12 @@ const logIn = (async (req, res) => {
             if (!user) {
                 res.status(401).json({ message: 'User does not exist' })
             }
-            const isValid = bCrypt.compareSync(password, user.password)
+            var isValid
+            try{
+                isValid = bCrypt.compareSync(password, user.password)
+            }catch(e){
+                res.status(401).json({message:'Пароль невалидный'})
+            }
             if (isValid) {
                 const token = jwt.sign(user._id.toString(),jwtSecret)
                 //res.cookie('UserHash',token.toString())

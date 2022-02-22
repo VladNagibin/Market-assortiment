@@ -1,10 +1,13 @@
 import React, {useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
-
+import { useAuth } from '../hooks/auth.hook'
+import { useNavigate } from "react-router-dom";
 export default function Auth() {
     const {loading,request,error,CleanErrors}=useHttp()
+    const {login,logout} = useAuth()
     const message = useMessage()
+    const navigate = useNavigate()
     const [form,setForm] = useState({"email":"","password":"",'name':''})
     const changeForm = event=>{
         setForm({...form,[event.target.name]:event.target.value})
@@ -19,16 +22,23 @@ export default function Auth() {
         const data = await request('/api/registration',"POST",{...form})
         message(data.message)
       }catch(e){
-
+        message(e.message)
       }
     }
     const logInHandler = async () =>{
       try{
         const data = await request('/api/logIn',"POST",{...form})
         message(data.message)
+        if(data.token){
+          login(data.token,data.id)
+          navigate('/')
+        }
       }catch(e){
-
+        message(e.message)
       }
+    }
+    const logOutHandler = async () =>{
+      logout()
     }
     return (
     <div>
@@ -40,6 +50,7 @@ export default function Auth() {
       <input type="name" name = "name" id = 'name' onChange={changeForm}></input>
       <button type='submit' onClick={registerHandler} disabled={loading}>Регистрация</button>
       <button type='submit' onClick={logInHandler} disabled={loading}>Вход</button>
+      <button type='submit' onClick={logOutHandler} disabled={loading}>Выход</button>
     </div>
   )
 }
