@@ -10,11 +10,9 @@ function getSection(secId) {
                 reject(err)
             } else {
                 result = JSON.parse(body)
-                //console.log(result.DATA.length)
                 resolve(result.DATA)
-
             }
-        })  
+        })
     })
 }
 
@@ -68,12 +66,12 @@ async function saveCategories() {
                 })
                 gr.save()
             }
-            
+
 
         }
     })
-    
-    
+
+
 }
 
-module.exports = {getSection,saveProduct,saveCategories}
+module.exports = { getSection, saveProduct, saveCategories }
