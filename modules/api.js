@@ -13,6 +13,7 @@ function getSection(secId) {
                 resolve(result.DATA)
             }
         })
+        
     })
 }
 
