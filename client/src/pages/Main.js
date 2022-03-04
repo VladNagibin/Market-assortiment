@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import TreeOfCategories from '../stuff/TreeOfCategories'
 import Categories from '../stuff/Categories'
+
 import Products from '../stuff/Products'
 export default function Main() {
   const {loading,request,error,CleanErrors}=useHttp()
@@ -11,19 +13,21 @@ export default function Main() {
   const [products,updateProducts] = useState([])
   async function clickCategories(id,name = 'main'){
     updateCurrGroup({id:id,name:name})
+    updateProducts([])
     const data = await request('/api/getCategory?id='+id)
     updateCategories(data.result)
-    if(currentGroup.id !=0){
-      openProducts()
-    }
+    
   }
   async function GoBack(){
     clickCategories(0)
   }
   async function openProducts(){
     const data = await request('/api/getProducts?id='+currentGroup.id)
-    updateProducts(data.result)
-    console.log(products.length)
+    try{
+      updateProducts(data.result)
+    }catch{
+      message('Нет товаров')
+    }
   }
   
   useEffect(()=>{
@@ -38,7 +42,7 @@ export default function Main() {
     <>
     <div>
       <h1>{currentGroup.name}</h1>
-      <Categories categories={categories} clickCategory = {clickCategories}/>
+      <TreeOfCategories categories={categories} clickCategory = {clickCategories}/>
       <button onClick={GoBack}>Домой</button>
       <button onClick={openProducts}>Получить товары</button>
       <br/>
