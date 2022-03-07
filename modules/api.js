@@ -13,37 +13,46 @@ function getSection(secId) {
                 resolve(result.DATA)
             }
         })
-        
+
     })
 }
 
 function saveProduct(data) {
     return new Promise((resolve, reject) => {
         let available
-        if (data.active = 'Y') {
-            available = true
+        if (data == undefined) {
+            resolve()
         } else {
-            available = false
-        }
-        try {
-            product = new Product({
-                api_id: data.id,
-                available: available,
-                name: data.name,
-                categoryId: data.section,
-                image: data.image,
-                images: data.images,
-                price: data.price_base,
-                min_quantity: data.min,
-                description: data.about,
-                barcode: data.barcode,
-                parameters: data.specifications,
-            })
-            product.save().then(doc => {
-                resolve()
-            })
-        } catch (e) {
-            reject(e)
+            try {
+                if (data.active == 'Y') {
+                    available = true
+                } else {
+                    available = false
+                }
+                if (data.barcode == null) {
+                    resolve()
+                } else {
+                    product = new Product({
+                        api_id: data.id,
+                        available: available,
+                        name: data.name,
+                        categoryId: data.section,
+                        image: data.image,
+                        images: data.images,
+                        price: data.price_base,
+                        min_quantity: data.min,
+                        description: data.about,
+                        barcode: data.barcode,
+                        parameters: data.specifications,
+                    })
+                    product.save().then(doc => {
+                        resolve()
+                    })
+
+                }
+            } catch (e) {
+                reject(e)
+            }
         }
     })
 }
@@ -74,5 +83,44 @@ async function saveCategories() {
 
 
 }
+function getAllSections(sections) {
+    return new Promise((resolve, reject) => {
+        try {
+            var arr = []
+            sections.forEach(element => {
+                result = findSection(element.Id)
+                arr.push(result)
+            })
+            Promise.all(arr).then(value => {
+                var arrv2 = []
+                value.forEach(element => {
+                    var allChildren = getAllSections(element)
+                    arrv2.push(allChildren)
+                })
+                Promise.all(arrv2).then(value => {
+                    value.forEach(element => {
+                        sections = [...sections, ...element]
+                    })
+                    resolve(sections)
+                })
+            })
 
-module.exports = { getSection, saveProduct, saveCategories }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+function findSection(id) {
+    return new Promise((resolve, reject) => {
+        try {
+            Category.find({ "parentId": id }).lean().then(result=>{
+                resolve(result)
+            })
+            
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+module.exports = { getSection, saveProduct, saveCategories, getAllSections }
