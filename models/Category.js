@@ -12,6 +12,9 @@ const schema = new Schema({
         type:String,
         required:true
     },
+    childCategories:{
+        type:Array
+    }
    
 })
 module.exports = model('category', schema)

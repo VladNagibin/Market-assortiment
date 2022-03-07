@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 var User = require('../models/User')
 var Category = require('../models/Category')
 const { logIn } = require('../modules/enter')
+const Product = require('../models/Product')
 const api = require('../modules/api')
 router.post('/login', logIn)
 
@@ -27,22 +28,22 @@ router.post('/out', ((req, res) => {
     })
 }))
 
-router.get('/getProducts', (async (req, res) => {
-    const { id } = req.query
-    await api.getSection(id).then(
-        result => {
-            res.status(200).json({
-                message: 'success',
-                result
-            })
-        },
-        err => {
-            res.status(401).json({
-                message: err
-            })
-        }
-    )
-}))
+// router.get('/getProducts', (async (req, res) => {
+//     const { id } = req.query
+//     await api.getSection(id).then(
+//         result => {
+//             res.status(200).json({
+//                 message: 'success',
+//                 result
+//             })
+//         },
+//         err => {
+//             res.status(401).json({
+//                 message: err
+//             })
+//         }
+//     )
+// }))
 
 router.get('/getCategory', (async (req, res) => {
     const { id } = req.query
@@ -66,20 +67,70 @@ router.get('/sosamba', (req, res) => {
         message: 'sosamba'
     })
 })
-router.get('/getAllChildCategories', (async (req, res) => {
+
+
+//{categoryId: { $in: [ '7500', '7504'] }}
+router.get('/getProductsTwenty', ((req, res) => {
     const { id } = req.query
-    await Category.find({ "parentId": id }).lean().then(
+    Category.findOne({ "Id": id }).lean().then(
         result => {
-            api.getAllSections(result).then(data => {
+            Product.find({ categoryId: { $in: result.childCategories } }).limit(20).lean().then(result => {
                 res.status(200).json({
                     message: 'success',
-                    data
+                    result
                 })
-            }
-            )
+
+            })
+        },
+        err => {
+            res.status(301).json({
+                message: 'error',
+                err
+            })
         }
     )
 }))
+router.get('/getProducts', ((req, res) => {
+    const { id } = req.query
+    Category.findOne({ "Id": id }).lean().then(
+        result => {
+            Product.find({ categoryId: { $in: result.childCategories } }).lean().then(result => {
+                res.status(200).json({
+                    message: 'success',
+                    result
+                })
+
+            })
+        },
+        err => {
+            res.status(301).json({
+                message: 'error',
+                err
+            })
+        }
+    )
+}))
+
+// router.post('/setChildCategories',(req,res)=>{
+//     Category.find().lean().then(data=>{
+//         var vsego = data.length
+//         var vypolneno = 0
+//         data.forEach(element=>{
+//             var arr = [element]
+//             api.getAllSections(arr).then(categories=>{
+//                 ids = []
+//                 categories.forEach(element=>{
+//                     ids.push(element.Id)
+//                 })
+//                 Category.updateOne({Id:element.Id},{$set:{childCategories:ids}}).then(result=>{
+//                     vypolneno = vypolneno+1
+//                     console.log('Выполнено '+ vypolneno +' из '+vsego)
+//                 })               
+//             })
+//         })
+//     })
+// })
+
 
 // router.post('/downloadProducts',(async (req,res)=>{
 //     categories = await Category.find({ "parentId": 0 }).lean() 

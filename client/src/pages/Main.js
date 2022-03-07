@@ -22,7 +22,10 @@ export default function Main() {
     clickCategories(0)
   }
   async function openProducts(){
-    const data = await request('/api/getProducts?id='+currentGroup.id)
+    const data = await request('/api/getProductsTwenty?id='+currentGroup.id)
+    request('/api/getProducts?id='+currentGroup.id).then(full_data=>{
+      updateProducts(full_data.result)
+    })
     try{
       updateProducts(data.result)
     }catch{
