@@ -4,10 +4,11 @@ const bCrypt = require('bcrypt')
 const mongoose = require('mongoose')
 var User = require('../models/User')
 var Category = require('../models/Category')
-const { logIn } = require('../modules/enter')
+const { logIn,checkToken } = require('../modules/enter')
 const Product = require('../models/Product')
 const api = require('../modules/api')
 router.post('/login', logIn)
+router.post('/checkAuth',checkToken )
 
 router.post('/registration', (async (req, res) => {
 

@@ -11,6 +11,9 @@ const schema = new Schema({
     password:{
         type:String,
         required:true
+    },
+    orders:{
+        type:Array
     }   
 })
 module.exports = model('user', schema)
