@@ -4,16 +4,16 @@ import 'materialize-css'
 import { AuthContext } from './context/AuthContext'
 import {useAuth} from './hooks/auth.hook'
 function App() {
-  const { token, login, logout, userId, ready } = useAuth()
+  const { token, login, logout, userId } = useAuth()
   var isAutheficated = !!token
   console.log(isAutheficated)
   const routes = useRoutes(isAutheficated)
   return (
     <AuthContext.Provider value={{
-      token, login, logout, userId, ready
+      token, login, logout, userId, isAutheficated
     }}>
       <BrowserRouter>
-        <div className="container">
+        <div>
           {routes}
         </div>
       </BrowserRouter>

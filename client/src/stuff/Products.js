@@ -1,9 +1,11 @@
 import React from 'react'
 import Product from './Product'
-export default function Products({products}) {
+export default function Products({ products }) {
   return (
-    products.map(product=>{
-        return <Product key = {product.id} product = {product}/>
+    products.map(product => {
+      return (
+         <Product key={product.id} product={product} />
+         )
     })
   )
 }

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth } from '../hooks/auth.hook'
+import React, { useContext, useEffect, useState } from 'react'
 import { useMessage } from '../hooks/message.hook'
 import { useHttp } from '../hooks/http.hook'
+import { AuthContext } from '../context/AuthContext'
 export default function Cab() {
-  const {token,userId,ready} = useAuth()
+  const auth = useContext(AuthContext)
   const {request,error,CleanErrors}=useHttp()
   const message = useMessage()
   const [user,setUser] = useState({
@@ -12,7 +12,7 @@ export default function Cab() {
     orders:[]
 })
   function checkToken(){
-    request('/api/checkAuth?id='+userId+'&token='+token).then(data=>{
+    request('/api/checkAuth?id='+auth.userId+'&token='+auth.token).then(data=>{
       setUser({
         name:data.name,
         mail:data.mail,
@@ -26,7 +26,7 @@ export default function Cab() {
   },[error])
   useEffect(()=>{
       checkToken()   
-  },[ready])
+  },[])
 
   return (
     <div>

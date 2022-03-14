@@ -1,11 +1,11 @@
-import React, {useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
-import { useAuth } from '../hooks/auth.hook'
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
 export default function Auth() {
     const {loading,request,error,CleanErrors}=useHttp()
-    const {login,logout} = useAuth()
+    const auth = useContext(AuthContext)
     const message = useMessage()
     const navigate = useNavigate()
     const [form,setForm] = useState({"email":"","password":"",'name':''})
@@ -30,7 +30,8 @@ export default function Auth() {
         const data = await request('/api/logIn',"POST",{...form})
         message(data.message)
         if(data.token){
-          login(data.token,data.id)
+          console.log(data.userId)
+          auth.login(data.token,data.userId)
           navigate('/')
         }
       }catch(e){
@@ -38,7 +39,7 @@ export default function Auth() {
       }
     }
     const logOutHandler = async () =>{
-      logout()
+      auth.logout()
     }
     return (
     <div>

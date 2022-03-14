@@ -24,7 +24,7 @@ const logIn = (async (req, res) => {
                 res.status(200).json({
                     message: 'success',
                     token: token,
-                    user_id: user._id
+                    userId: user.id
                 })
                 //res.json({ token })
             }
