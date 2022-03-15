@@ -19,8 +19,8 @@ export default function Auth() {
     },[error,CleanErrors])
     const registerHandler = async () =>{
       try{
-        const data = await request('/api/registration',"POST",{...form})
-        message(data.message)
+        await request('/api/registration',"POST",{...form})
+        message("Пользователь зарегистрирован")
       }catch(e){
         message(e.message)
       }
@@ -28,11 +28,11 @@ export default function Auth() {
     const logInHandler = async () =>{
       try{
         const data = await request('/api/logIn',"POST",{...form})
-        message(data.message)
         if(data.token){
           console.log(data.userId)
           auth.login(data.token,data.userId)
-          navigate('/')
+          message("Вход выполнен")
+          navigate('/auth')
         }
       }catch(e){
         message(e.message)

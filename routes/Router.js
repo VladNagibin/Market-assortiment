@@ -111,6 +111,21 @@ router.get('/getProducts', ((req, res) => {
         }
     )
 }))
+router.get("/Product",(req,res)=>{
+    const {id}=req.query
+    Product.findById(id).then(result=>{
+        res.status(200).json({
+            message:'success',
+            result
+        })
+    }),
+    err=>{
+        res.status(301).json({
+            message:'error',
+            error:err
+        })
+    }
+})
 
 // router.post('/setChildCategories',(req,res)=>{
 //     Category.find().lean().then(data=>{

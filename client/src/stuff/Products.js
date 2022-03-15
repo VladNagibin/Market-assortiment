@@ -4,8 +4,7 @@ export default function Products({ products }) {
   return (
     products.map(product => {
       return (
-         <Product key={product.id} product={product} />
-         )
+         <Product key={product._id} product={product} />)
     })
   )
 }

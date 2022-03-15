@@ -12,11 +12,14 @@ export default function Cab() {
     orders:[]
 })
   function checkToken(){
-    request('/api/checkAuth?id='+auth.userId+'&token='+auth.token).then(data=>{
+    request('/api/checkAuth',"POST",{
+      id:auth.userId,
+      token:auth.token
+    }).then(data=>{
       setUser({
-        name:data.name,
-        mail:data.mail,
-        orders:data.orders
+        name:data.user.name,
+        mail:data.user.mail,
+        orders:data.user.orders
       })
     })
   }
@@ -25,7 +28,7 @@ export default function Cab() {
     CleanErrors()
   },[error])
   useEffect(()=>{
-      checkToken()   
+      checkToken() 
   },[])
 
   return (

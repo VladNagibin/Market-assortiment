@@ -9,7 +9,7 @@ export const useRoutes = isAunteficated => {
         return (
             <Routes>
                 <Route path='/' exact element={<Main />} />
-                <Route path='/lk' exact element={<Cab />} />
+                <Route path='/auth' exact element={<Cab />} />
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>
@@ -19,7 +19,7 @@ export const useRoutes = isAunteficated => {
             <Routes>
                 <Route path='/' exact element={<Main />} />
                 <Route path='/auth' exact element={<Auth />} />
-                <Route path='/detail:id' element={<Detail />} />
+                <Route path='/detail/:id' element={<Detail />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>)
     }

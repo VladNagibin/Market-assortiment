@@ -1,8 +1,5 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
-img{
-    width: 27%!important;
-}
 
 ul.hr {
     margin: 0; /* Обнуляем значение отступов */
