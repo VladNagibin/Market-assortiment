@@ -48,12 +48,29 @@ router.post('/out', ((req, res) => {
 
 router.get('/getCategory', (async (req, res) => {
     const { id } = req.query
-    await Category.find({ "parentId": id }).lean().then(
+     Category.find({ "parentId": id }).lean().then(
         result => {
-            res.status(200).json({
-                message: 'success',
-                result
-            })
+            if(id!=="0"){
+                Category.findOne({Id:id}).lean().then(group=>{
+                    res.status(200).json({
+                        message: 'success',
+                        name:group.name,
+                        result
+                    })
+                    
+                },grErr=>{
+                    res.status(401).json({
+                        message: grErr
+                    }) 
+                })
+            }else{
+                res.status(200).json({
+                    message: 'success',
+                    result,
+                    name:'Каталог'
+                })
+            }
+            
         },
         err => {
             res.status(401).json({
@@ -73,6 +90,12 @@ router.get('/sosamba', (req, res) => {
 //{categoryId: { $in: [ '7500', '7504'] }}
 router.get('/getProductsTwenty', ((req, res) => {
     const { id } = req.query
+    if(id==0){
+        res.status(301).json({
+            message: 'start category'
+        })
+        res.end()  
+    }
     Category.findOne({ "Id": id }).lean().then(
         result => {
             Product.find({ categoryId: { $in: result.childCategories } }).limit(20).lean().then(result => {
@@ -80,9 +103,8 @@ router.get('/getProductsTwenty', ((req, res) => {
                     message: 'success',
                     result
                 })
-
             })
-        },
+        },  
         err => {
             res.status(301).json({
                 message: 'error',
@@ -93,6 +115,12 @@ router.get('/getProductsTwenty', ((req, res) => {
 }))
 router.get('/getProducts', ((req, res) => {
     const { id } = req.query
+    if(id==0){
+        res.status(301).json({
+            message: 'start category'
+        })
+        res.end()  
+    }
     Category.findOne({ "Id": id }).lean().then(
         result => {
             Product.find({ categoryId: { $in: result.childCategories } }).lean().then(result => {

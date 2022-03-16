@@ -26,7 +26,7 @@ export default function Cab() {
   useEffect(()=>{
     message(error)
     CleanErrors()
-  },[error])
+  },[error,CleanErrors,message])
   useEffect(()=>{
       checkToken() 
   },[])

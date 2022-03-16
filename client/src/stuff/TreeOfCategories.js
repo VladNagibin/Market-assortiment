@@ -2,12 +2,8 @@ import React, { useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 
 import Categories from './Categories'
-export default function TreeOfCategories({ categories, clickCategory }) {
+export default function TreeOfCategories({ categories }) {
     const { request } = useHttp()
-    function OpenCaterogy(id,name) {
-        openChild(null)
-        clickCategory(id,name)
-    }
     const [childCategories, updateChildCategories] = useState([])
     async function openChild(id) {
         if (id == null) {
@@ -27,8 +23,8 @@ export default function TreeOfCategories({ categories, clickCategory }) {
     }
     return (
         <div onMouseLeave={destroyChildCategories}>
-            <Categories categories={categories} clickCategory={OpenCaterogy} openChild={openChild} parent={true} />
-            <Categories categories={childCategories} clickCategory={OpenCaterogy} openChild={openChild} parent={false}/>
+            <Categories categories={categories} openChild={openChild} parent={true} />
+            <Categories categories={childCategories} openChild={openChild} parent={false}/>
         </div>
     )
 }

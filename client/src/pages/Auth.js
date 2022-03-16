@@ -16,7 +16,7 @@ export default function Auth() {
       //console.log(error)
       message(error)
       CleanErrors()
-    },[error,CleanErrors])
+    },[error,CleanErrors,message])
     const registerHandler = async () =>{
       try{
         await request('/api/registration',"POST",{...form})

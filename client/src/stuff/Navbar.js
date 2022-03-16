@@ -18,7 +18,7 @@ export default function Navbar() {
                     <NavLink className="brand-logo" to={'/'}>Сосамба</NavLink>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><NavLink to={'/auth'}>Профиль</NavLink></li>
-                        <li><NavLink to={'/Catalog'}>Каталог</NavLink></li>
+                        <li><NavLink to={'/Catalog/0'}>Каталог</NavLink></li>
                         <li><a href="/" onClick={logoutHandler}>Выход</a></li>
                     </ul>
                 </div>
@@ -30,7 +30,7 @@ export default function Navbar() {
                 <div className="nav-wrapper">
                     <NavLink className="brand-logo" to={'/'}>Сосамба</NavLink>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><NavLink to={'/Catalog'}>Каталог</NavLink></li>
+                        <li><NavLink to={'/Catalog/0'}>Каталог</NavLink></li>
                         <li><NavLink to={'/auth'}>Войти</NavLink></li>
                         <li><NavLink to={'/auth'}>Зарегистрироваться</NavLink></li>
                     </ul>

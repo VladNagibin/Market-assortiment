@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function Category({ category, clickCategory, openChild, parent }) {
+export default function Category({ category, openChild, parent }) {
 
-  function OpenCaterogy() {
-    clickCategory(category.Id, category.name)
-  }
+  // function OpenCaterogy() {
+  //   clickCategory(category.Id, category.name)
+  // }
   function getChildCategories() {
     if (parent) {
       try {
@@ -19,6 +20,6 @@ export default function Category({ category, clickCategory, openChild, parent })
 
 
   return (
-    <span id={category.Id} onMouseEnter={getChildCategories} onClick={OpenCaterogy} >{category.name}</span>
+    <span id={category.Id} onMouseEnter={getChildCategories}><Link to={'/catalog/'+category.Id}>{category.name}</Link></span>
   )
 }

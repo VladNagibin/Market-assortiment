@@ -29,16 +29,16 @@ export default function Detail() {
     getProduct()
   }, [])
   return (
-    <div class="card large">
-      <div class="card-image">
-        <img src={product.image} />
-        <span class="card-title">{product.name}</span>
+    <div className="card large">
+      <div className="card-image">
+        <img src={product.image} alt='product' />
+        <span className="card-title">{product.name}</span>
       </div>
-      <div class="card-content">
+      <div className="card-content">
         <p>{product.price}</p>
       </div>
-      <div class="card-action">
-        <button class = 'waves-effect waves-light btn' href="#">Купить</button>
+      <div className="card-action">
+        <button className = 'waves-effect waves-light btn' href="#">Купить</button>
       </div>
 
     </div>

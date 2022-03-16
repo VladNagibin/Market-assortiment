@@ -12,7 +12,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/' exact element={<Main />} />
                 <Route path='/auth' exact element={<Cab />} />
                 <Route path='/detail/:id' element={<Detail />} />
-                <Route path='/catalog' element={<Catalog />} />
+                <Route path='/catalog/:id' element={<Catalog />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>
         )
