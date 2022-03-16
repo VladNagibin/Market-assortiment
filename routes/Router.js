@@ -99,10 +99,9 @@ router.get('/getProducts', ((req, res) => {
                 res.status(200).json({
                     message: 'success',
                     result
-                })
-
+                })  
             })
-        },
+        },  
         err => {
             res.status(301).json({
                 message: 'error',
