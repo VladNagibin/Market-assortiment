@@ -3,7 +3,6 @@ const bCrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 var User = mongoose.model('user')
 const { jwtSecret } = require('../config/app')
-const res = require('express/lib/response')
 const logIn = (async (req, res) => {
     const { email, password } = req.body
     User.findOne({ mail: email })

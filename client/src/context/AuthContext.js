@@ -7,5 +7,9 @@ export const AuthContext = createContext({
   userId: null,
   login: noop,
   logout: noop,
-  isAutheficated: false
+  isAutheficated: false,
+  cart:[],
+  addInCart:noop,
+  deleteFromCart:noop,
+  deleteAll:noop
 })

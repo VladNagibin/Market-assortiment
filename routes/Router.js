@@ -2,6 +2,7 @@ const { Router } = require('express')
 const router = Router()
 const bCrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const ObjectId = require('mongodb').ObjectId
 var User = require('../models/User')
 var Category = require('../models/Category')
 const { logIn,checkToken } = require('../modules/enter')
@@ -145,6 +146,27 @@ router.get("/Product",(req,res)=>{
             message:'success',
             result
         })
+    }),
+    err=>{
+        res.status(301).json({
+            message:'error',
+            error:err
+        })
+    }
+})
+router.post("/Product",async (req,res)=>{
+    const {ids}=req.body
+    ObjId=[]
+    await ids.forEach(element => {
+        ObjId.push(ObjectId(element))
+    });
+    //{_id:{$in:[ObjectId("6225bc4063a181e272929ff3"),ObjectId("6225bc6963a181e27292a2c3")]}}
+    Product.find({_id:{$in:ObjId}}).then(result=>{
+        res.status(200).json({
+            message:'success',
+            result
+        })
+
     }),
     err=>{
         res.status(301).json({

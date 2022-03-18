@@ -19,6 +19,7 @@ export default function Navbar() {
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><NavLink to={'/auth'}>Профиль</NavLink></li>
                         <li><NavLink to={'/Catalog/0'}>Каталог</NavLink></li>
+                        <li><NavLink to={'/cart'}>Корзина<span className="badge">{(auth.cart!=null)?auth.cart.length:0 }</span></NavLink></li>
                         <li><a href="/" onClick={logoutHandler}>Выход</a></li>
                     </ul>
                 </div>
