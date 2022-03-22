@@ -11,7 +11,7 @@ export default function Product({ product,cart }) {
   }
   function cartButton(){
     if(cart){
-      return <><button onClick={deleteFromCart}>Удалить</button></>
+      return <button onClick={deleteFromCart}>Удалить</button>
       
     }else{
       return <button onClick={addToCart}>В корзину</button>
