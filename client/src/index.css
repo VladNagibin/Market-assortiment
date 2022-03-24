@@ -10,3 +10,9 @@ ul.hr {
     margin-right: 5px; /* Отступ слева */
     /*padding: 3px;  Поля вокруг текста */
 }
+
+.childCategories{
+    position:absolute;
+    z-index:10;
+    opacity: 0.9;
+}

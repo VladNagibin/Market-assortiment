@@ -18,13 +18,13 @@ export default function Product({ product,cart }) {
     }
   }
   return (
-    <div className='card large' id={product._id}>
+    <div className='card large hoverable' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
         <img src={product.image} className='activator responsive-img'  alt='product'/>
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>{product.name}</span>
-        <a className="waves-effect waves-light btn"><Link to={'/detail/'+product._id}>Open</Link></a>
+        <Link to={'/detail/'+product._id}><a className="waves-effect waves-light btn white-text">Open</a></Link>
         {cartButton()}
       </div>
       <div className='card-reveal'>
