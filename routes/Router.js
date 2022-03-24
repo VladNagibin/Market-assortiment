@@ -51,31 +51,16 @@ router.get('/getCategory', (async (req, res) => {
     const { id } = req.query
      Category.find({ "parentId": id }).lean().then(
         result => {
-            if(id!=="0"){
-                Category.findOne({Id:id}).lean().then(group=>{
-                    res.status(200).json({
-                        message: 'success',
-                        name:group.name,
-                        result
-                    })
-                    
-                },grErr=>{
-                    res.status(401).json({
-                        message: grErr
-                    }) 
-                })
-            }else{
-                res.status(200).json({
-                    message: 'success',
-                    result,
-                    name:'Каталог'
-                })
-            }
+            res.status(200).json({
+                message: 'success',
+                result
+            })
             
         },
         err => {
             res.status(401).json({
-                message: err
+                message: 'fail',
+                error:err
             })
         }
     )
@@ -175,7 +160,29 @@ router.post("/Product",async (req,res)=>{
         })
     }
 })
-
+router.get('/getCategoryName',(req,res)=>{
+    const {id} = req.query
+    if(id== '0'){
+        res.status(200).json({
+            message:'success',
+            name:'Каталог'
+        })
+    }else{
+        Category.findOne({Id:id}).lean().then(result=>{
+            res.status(200).json({
+                message:'success',
+                name:result.name
+            })
+        },
+        err=>{
+            res.status(301).json({
+                message:'fail',
+                error:err
+            })
+        })
+    }
+    
+})
 // router.post('/setChildCategories',(req,res)=>{
 //     Category.find().lean().then(data=>{
 //         var vsego = data.length

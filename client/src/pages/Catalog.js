@@ -8,25 +8,20 @@ import { Link, useParams } from 'react-router-dom'
 export default function Catalog() {
     const { request, error, CleanErrors } = useHttp()
     const parid = useParams().id
-    const [grName, updateGrName] = useState('')
+    const [name, updateName] = useState()
     const message = useMessage()
     const [pageCount, updatePageCount] = useState(0)
-    const [categories, updateCategories] = useState([])
     const [products, updateProducts] = useState([])
     const [drawedProducts, updateDrawedProducts] = useState([])
-    async function getCategories(id) {
-        var data = await request('/api/getCategory?id=' + id)
-        updateGrName(data.name)
-        updateCategories(data.result)
-        // 
-        // 
-        // 
-
+    function getCategoryName() {
+        request('/api/getCategoryName?id=' + parid).then(data => {
+            updateName(data.name)
+        })
     }
     const pageClickHandler = (event) => {
         updateDrawedProducts(products.slice(event.selected * 20, event.selected * 20 + 20));
     }
-    function cleanProducts(){
+    function cleanProducts() {
         updateDrawedProducts([])
         updateProducts([])
         updatePageCount(0)
@@ -49,11 +44,11 @@ export default function Catalog() {
     }
 
     useEffect(() => {
-        getCategories(parid)
+        getCategoryName()
         if (parid && parid !== "0") {
             openProducts()
         } else {
-            cleanProducts() 
+            cleanProducts()
         }
     }, [parid])
     useEffect(() => {
@@ -64,20 +59,16 @@ export default function Catalog() {
     return (
         <>
             <div className='row'>
-                <h1>{grName}</h1>
-
-                <TreeOfCategories categories={categories} />
+                <h1>{name}</h1>
                 <button><Link to={'/catalog/0'}>Домой</Link></button>
                 <br />
-                <div className="col s12 m7">
-                    <Products products={drawedProducts} />
-                </div>
+                <Products products={drawedProducts} />
                 <ReactPaginate
                     onPageChange={pageClickHandler}
                     pageCount={pageCount}
                     renderOnZeroPageCount={null}
                     activeClassName="active"
-                    className='pagination'
+                    className='col s12 center-align pagination'
                     pageClassName='waves-effect'
                 />
             </div>

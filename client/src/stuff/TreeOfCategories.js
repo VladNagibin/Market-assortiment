@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook'
 
 import Categories from './Categories'
 export default function TreeOfCategories({ categories }) {
-    const { request } = useHttp()
+    const { request, loading } = useHttp()
     const [childCategories, updateChildCategories] = useState([])
     async function openChild(id) {
         if (id == null) {
@@ -21,10 +21,27 @@ export default function TreeOfCategories({ categories }) {
     function destroyChildCategories() {
         openChild(null)
     }
+    function drawchildCategories() {
+        if (childCategories.length) {
+            return (
+                <div className='col s3 collection'>
+                    <Categories categories={childCategories} openChild={openChild} parent={false} />
+                </div>
+            )
+
+        }else{
+            return(<></>)
+        }
+    }
     return (
-        <div onMouseLeave={destroyChildCategories}>
-            <Categories categories={categories} openChild={openChild} parent={true} />
-            <Categories categories={childCategories} openChild={openChild} parent={false}/>
-        </div>
+        <>
+            <div onMouseLeave={destroyChildCategories}>
+                <div className='col s3 collection'>
+                    <Categories categories={categories} openChild={openChild} parent={true} />
+                </div>
+                {drawchildCategories()}
+            </div>
+        </>
     )
 }
+//<Categories categories={childCategories} openChild={openChild} parent={false}/>

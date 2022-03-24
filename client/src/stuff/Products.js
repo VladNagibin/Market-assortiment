@@ -4,7 +4,12 @@ export default function Products({ products }) {
   return (
     products.map(product => {
       return (
-         <Product key={product._id} product={product} cart = {false}/>)
+        <>
+          <div className="col s12 m6 l4">
+          <Product key={product._id} product={product} cart = {false}/>
+          </div>
+        </>
+      )
     })
   )
 }

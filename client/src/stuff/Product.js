@@ -11,20 +11,20 @@ export default function Product({ product,cart }) {
   }
   function cartButton(){
     if(cart){
-      return <button onClick={deleteFromCart}>Удалить</button>
+      return <a className='waves-effect waves-light btn' onClick={deleteFromCart}>Удалить</a>
       
     }else{
-      return <button onClick={addToCart}>В корзину</button>
+      return <a className='waves-effect waves-light btn' onClick={addToCart}>В корзину</a>
     }
   }
   return (
-    <div className='card small' id={product._id}>
+    <div className='card large' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
-        <img src={product.image} className='activator responsive-img' width="100" alt='product'/>
+        <img src={product.image} className='activator responsive-img'  alt='product'/>
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>{product.name}</span>
-        <button><Link to={'/detail/'+product._id}>Open</Link></button>
+        <a className="waves-effect waves-light btn"><Link to={'/detail/'+product._id}>Open</Link></a>
         {cartButton()}
       </div>
       <div className='card-reveal'>
