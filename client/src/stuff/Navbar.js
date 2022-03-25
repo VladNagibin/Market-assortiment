@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
@@ -7,6 +7,9 @@ import TreeOfCategories from './TreeOfCategories'
 export default function Navbar() {
     const auth = useContext(AuthContext)
     const message = useMessage()
+
+    const [categories, setCategories] = useState([])
+    const [drawedCategories, setDrawedCategories] = useState([])
     const { request } = useHttp()
     const logoutHandler = event => {
         event.preventDefault()
@@ -25,25 +28,50 @@ export default function Navbar() {
         var data = await request('/api/getCategory?id=' + id)
         setCategories(data.result)
     }
-    const [categories, setCategories] = useState([])
-    const [drawedCategories, setDrawedCategories] = useState([])
+    function drawCategories() {
+        if (drawedCategories.length) {
+            return (
+                <div className='container'>
+                    <div className='row'>
+                        <TreeOfCategories categories={drawedCategories} />
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <>
+                </>
+            )
+        }
+    }
     useEffect(() => {
         getCategories(0)
     }, [])
+    //<span className="badge nav-kek">{(auth.cart != null) ? auth.cart.length : 0}</span>
     function checkAuth() {
         if (auth.isAutheficated) {
             return (
                 <>
-                    <li><NavLink to={'/auth'}>Профиль</NavLink></li>
-                    <li><NavLink to={'/cart'}>Корзина<span className="badge">{(auth.cart != null) ? auth.cart.length : 0}</span></NavLink></li>
-                    <li><a href="/" onClick={logoutHandler}>Выход</a></li>
+                    <div className='col s1  nav-buttons'>
+                        <NavLink className='btn white black-text catalog-button' to={'/auth'}>Профиль</NavLink>
+                    </div>
+                    <div className='col s1  nav-buttons'>
+                        <NavLink className='black-text btn white catalog-button' to={'/cart'}>Корзина</NavLink>
+                    </div>
+                    <div className='col s1 nav-buttons'>
+                        <a href="/" className='black-text btn white catalog-button' onClick={logoutHandler}>Выход</a>
+                    </div>
                 </>
             )
         } else {
             return (
                 <>
-                    <li><NavLink to={'/auth'}>Войти</NavLink></li>
-                    <li><NavLink to={'/auth'}>Зарегистрироваться</NavLink></li>
+                    <div className='col s1 nav-buttons'>
+                        <NavLink className='black-text btn white catalog-button' to={'/auth'}>Войти</NavLink>
+                    </div>
+                    <div className='col s2 nav-buttons'>
+                        <NavLink className='black-text btn white catalog-button' to={'/auth'}>Зарегистрироваться</NavLink>
+                    </div>
                 </>
             )
         }
@@ -52,20 +80,36 @@ export default function Navbar() {
         <>
             <div className='navbar-fixed'>
                 <nav>
-                    <div className="nav-wrapper">
-                        <div className='container'>
-                            <NavLink className="brand-logo" to={'/'}>Сосамба</NavLink>
-                            <ul className="right hide-on-med-and-down">
-                                <li><NavLink to={'/catalog/0'}>Каталог</NavLink></li>
+                    <div className="nav-wrapper white">
+                        <div className='row'>
+                            <div className='col s2 offset-s1'>
+                                <NavLink className="brand-logo left" to='/'><img className='logo' src='logo1.png'></img></NavLink>
+                            </div>
+                            <div className="col s1">
+                                <a className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</a>
+                            </div>
+                            <div className='col s5'>
+                                <form className='grey lighten-3 nav-search'>
+                                    <div className="input-field">
 
-                                {checkAuth()}
+                                        <input id="search" type="search" placeholder='Поиск епту' required />
 
-                            </ul>
+                                    </div>
+                                </form>
+                            </div>
+                            {checkAuth()}
+
 
                         </div>
                     </div>
                 </nav>
             </div>
+            <div className='container'>
+                <div className='row'>
+                    <TreeOfCategories categories={drawedCategories} />
+                </div>
+            </div>
+
         </>
     )
 

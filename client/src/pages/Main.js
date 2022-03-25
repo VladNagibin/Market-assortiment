@@ -1,43 +1,69 @@
-import React, { useState, useEffect } from 'react'
-import { useHttp } from '../hooks/http.hook'
-import { useMessage } from '../hooks/message.hook'
-import TreeOfCategories from '../stuff/TreeOfCategories'
-import Products from '../stuff/Products'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default function Main() {
-  const { request, error, CleanErrors } = useHttp()
-  const message = useMessage()
-  const [categories, setCategories] = useState([])
-  async function getCategories(id) {
-    var data = await request('/api/getCategory?id=' + id)
-    setCategories(data.result)
+  function mainBannerOnClick() {
+    alert('Сосать будешь?')
   }
-  useEffect(() => {
-    getCategories(0)
-  }, [])
-  //width="500" heigth='500'
   return (
-    <>
-      <div className='container'>
-        <div className='row'>
-          <TreeOfCategories categories={categories} />
-          <div className='col s6 '>
-            <div className='card'>
-              <div className='card-image hoverable'>
-                <Link to={'/catalog/21'}><img src='dacha_banner.png' ></img></Link>
-              </div>
-              {/* <div class="card-content">
-                <p>Дачный сезон совсем скоро. Вперед за покупками</p>
-              </div>
-              <div className="card-action">
-                <a href="#">This is a link</a>
-              </div> */}
+    <div className='container'>
+      <div className='row'>
+        <div className='col s12'>
+          <div className='card'>
+            <div className='card-image hoverable '>
+              <img onClick={mainBannerOnClick} src='banner-first-main.png'></img>
             </div>
 
           </div>
         </div>
       </div>
-    </>
+      <div className='row'>
+        <h1>Товары по категориям</h1>
+      </div>
+      <div className='row'>
+        <div className='col s3'>
+          <div className='card main-banners'>
+            <div className='card-image main-banners hoverable '>
+              <NavLink to='/catalog/21'><img src='Sad_i_dacha_category.png'></img></NavLink>
+            </div>
+
+          </div>
+        </div>
+        <div className='col s5'>
+          <div className='card main-banners'>
+            <div className='card-image main-banners hoverable '>
+              <NavLink to='/catalog/141'><img src='kancelarya_category.png'></img></NavLink>
+            </div>
+
+          </div>
+        </div>
+        <div className='col s4'>
+          <div className='card main-banners'>
+            <div className='card-image  main-banners hoverable'>
+              <NavLink to='/catalog/114'><img src='himiya_category.png'></img></NavLink>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col s4'>
+          <div className='card main-banners'>
+            <div className='card-image main-banners hoverable'>
+              <NavLink to='/catalog/22'><img src='dlya_detei_category.png'></img></NavLink>
+            </div>
+          </div>
+        </div>
+        <div className='col s8'>
+          <div className='card main-banners'>
+            <div className='card-image main-banners hoverable'>
+              <NavLink to='/catalog/130'><img src='tekstil_category.png'></img></NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   )
 }

@@ -24,7 +24,7 @@ export default function TreeOfCategories({ categories }) {
     function drawchildCategories() {
         if (childCategories.length) {
             return (
-                <div className='col s3 offset-s2 collection white childCategories'>
+                <div className='col s2 offset-s3 collection white childCategories'>
                     <Categories categories={childCategories} openChild={openChild} parent={false} />
                 </div>
             )
@@ -36,7 +36,7 @@ export default function TreeOfCategories({ categories }) {
     return (
         <>
             <div onMouseLeave={destroyChildCategories}>
-                <div className='col s3 collection white'>
+                <div className='col s2 offset-s1 collection white childCategories'>
                     <Categories categories={categories} openChild={openChild} parent={true} />
                 </div>
                 {drawchildCategories()}

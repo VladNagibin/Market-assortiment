@@ -15,4 +15,33 @@ ul.hr {
     position:absolute;
     z-index:10;
     opacity: 0.9;
+    border-radius: 10px;
+}
+.catalog-button{
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.nav-kek{
+    margin-top: 7px;
+}
+.nav-buttons{
+    left:50px;
+}
+.nav-search{
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 30px;
+}
+.category{
+    border-radius: 10px;
+}
+.main-banners{
+    border-radius: 20px;
+}
+
+.logo{
+    margin-top: 10px;
+}
+nav{
+    line-height: 30px;
 }

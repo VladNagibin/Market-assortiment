@@ -20,6 +20,6 @@ export default function Category({ category, openChild, parent }) {
 
 
   return (
-    <Link to={'/catalog/'+category.Id} className='collection-item black-text' id={category.Id} onMouseEnter={getChildCategories}>{category.name}</Link>
+    <Link to={'/catalog/'+category.Id} className='collection-item black-text category' id={category.Id} onMouseEnter={getChildCategories}>{category.name}</Link>
   )
 }
