@@ -57,7 +57,7 @@ export default function Catalog() {
         CleanErrors()
     }, [error, CleanErrors])
     return (
-        <>
+        <div className='container'>
             <div className='row'>
                 <h1>{name}</h1>
                 <button><Link to={'/catalog/0'}>Домой</Link></button>
@@ -72,6 +72,6 @@ export default function Catalog() {
                     pageClassName='waves-effect'
                 />
             </div>
-        </>
+        </div>
     )
 }

@@ -5,6 +5,7 @@ import { AuthContext } from './context/AuthContext'
 import { useAuth } from './hooks/auth.hook'
 import Navbar from "./stuff/Navbar";
 import { useCart } from "./hooks/cart.hook";
+import Footer from "./stuff/Footer";
 
 function App() {
   const { token, login, logout, userId } = useAuth()
@@ -16,11 +17,13 @@ function App() {
       token, login, logout, userId, isAutheficated,cart,deleteFromCart,addInCart,deleteAll
     }}>
       <BrowserRouter>
-      {<Navbar /> }
+      <Navbar />
         <div>
           {routes}
         </div>
+        <Footer/>
       </BrowserRouter>
+      
     </AuthContext.Provider>
   );
 }

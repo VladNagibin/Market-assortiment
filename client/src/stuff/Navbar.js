@@ -82,13 +82,13 @@ export default function Navbar() {
                 <nav>
                     <div className="nav-wrapper white">
                         <div className='row'>
-                            <div className='col s2 offset-s1'>
+                            <div className='col s2 offset-m1'>
                                 <NavLink className="brand-logo left" to='/'><img className='logo' src='logo1.png'></img></NavLink>
                             </div>
                             <div className="col s1">
                                 <a className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</a>
                             </div>
-                            <div className='col s5'>
+                            <div className='col s5 hide-on-med-and-down'>
                                 <form className='grey lighten-3 nav-search'>
                                     <div className="input-field">
 
