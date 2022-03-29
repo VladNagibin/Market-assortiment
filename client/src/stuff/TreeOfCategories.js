@@ -5,21 +5,11 @@ import Categories from './Categories'
 export default function TreeOfCategories({ categories }) {
     const { request, loading } = useHttp()
     const [childCategories, updateChildCategories] = useState([])
-    async function openChild(id) {
-        if (id == null) {
-            updateChildCategories([])
-        } else {
-            //console.log(id)
-            const data = await request('/api/getCategory?id=' + id)
-            if (data.result.length !== 0) {
-                updateChildCategories(data.result)
-            } else {
-                updateChildCategories([])
-            }
-        }
+    async function openChild(categories) {
+        updateChildCategories(categories)
     }
     function destroyChildCategories() {
-        openChild(null)
+        openChild([])
     }
     function drawchildCategories() {
         if (childCategories.length) {

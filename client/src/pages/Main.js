@@ -9,6 +9,28 @@ export default function Main() {
   const popularProductsId = ['61f63f647efacc392a1ae510', '61f63f677efacc392a1ae514', '61f63f687efacc392a1ae516', '61f63f697efacc392a1ae524', '61f63f697efacc392a1ae528', '61f63f6a7efacc392a1ae52e']
   const { request } = useHttp()
   const [popularProducts, updatePopularProducts] = useState([])
+  function PrevArrow(props){
+    const {className,style,onClick}= props
+    return(
+      <div
+      className={className}
+      style={{...style,display:'block',color:'blue'}}
+      onClick={onClick}
+    ><i className="material-icons">chevron_left</i></div>
+  )
+  }
+  function NextArrow(props){
+    const {className,style,onClick}= props
+    return(
+      //
+      <div
+        className={className}
+        style={{...style,display:'block',color:'blue'}}
+        onClick={onClick}
+      ><i className="material-icons">chevron_right</i></div>
+    )
+    
+  }
   async function getPopular() {
     var data = await request('/api/Product', 'POST', {
       ids: popularProductsId
@@ -24,10 +46,12 @@ export default function Main() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
-    // nextArrow:<a className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></a>,
+    //autoplay: true,
+     nextArrow:<NextArrow/>,
 
-    // prevArrow:<a className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></a>
+     //,
+
+     prevArrow:<PrevArrow/>
   }
 
   useEffect(async () => {
@@ -98,7 +122,7 @@ export default function Main() {
           {
             popularProducts.map(product => {
               return (
-                <div key={product._id}>
+                <div key={product._id} className='carousel-card'>
                   <Product product={product} cart={false} />
                 </div>
                 //<a className="carousel-item" href={'#'+product._id} key={product._id}><img src={product.image}/></a>
@@ -117,7 +141,7 @@ export default function Main() {
             <input placeholder="moshnayaPochta@mail.ru" id="mail" type="text" className="validate  white"/>
           </div>
           <div className='col s4'>
-            <a className='podpiska-button waves-effect waves-light btn'>Подписаться</a>
+            <a className='podpiska-button waves-effect waves-light btn indigo darken-3'>Подписаться</a>
           </div>
         </div>
 

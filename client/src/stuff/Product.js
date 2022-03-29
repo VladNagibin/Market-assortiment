@@ -1,22 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-export default function Product({ product, cart }) {
+export default function Product({ product, cart,stQuantity=0 }) {
   const auth = useContext(AuthContext)
-  function addToCart() {
-    auth.addInCart(product._id)
+  const [quantity, setQuantity] = useState(stQuantity)
+  
+  function plusCart(){
+    setQuantity(quantity+1)
   }
-  function deleteFromCart() {
-    auth.deleteFromCart(product._id)
-  }
-  function cartButton() {
-    if (cart) {
-      return <a className='waves-effect waves-light btn' onClick={deleteFromCart}>Удалить</a>
-
-    } else {
-      return <a className='waves-effect waves-light btn' onClick={addToCart}>В корзину</a>
+  function minusCart(){
+    if(quantity>0){
+      setQuantity(quantity-1)
+    }else{
+      setQuantity(0)
     }
+     
   }
+  useEffect(()=>{
+    if(quantity==0){
+      auth.deleteFromCart(product._id)
+    }else{
+      auth.addInCart(product._id,quantity)
+    }
+    
+  },[])
   return (
     <div className='card hoverable' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
@@ -31,8 +38,13 @@ export default function Product({ product, cart }) {
           <p className='price-text'>{product.price + 'P'}</p>
           <p className='inBox-text'>{'(От ' + product.min_quantity + ' шт)'}</p>
         </div>
-        <div className='second center-align'>
-          <p>...</p>
+        <div className='space'></div>
+        <div className='second center-align row'>
+          <div className='cart-adding'>
+            <i className="material-icons prefix waves-effect col s3 plus-minus" onClick={minusCart}>remove</i>
+            <input readOnly id="last_name" type="text" className="validate col s6 " value={quantity}/>
+            <i className="material-icons prefix waves-effect right col s3 plus-minus" onClick={plusCart}>add</i>
+            </div>
         </div>
       </div>
       {/* <div className='card-content'>

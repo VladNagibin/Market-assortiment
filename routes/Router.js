@@ -142,6 +142,7 @@ router.get("/Product",(req,res)=>{
 router.post("/Product",async (req,res)=>{
     const {ids}=req.body
     ObjId=[]
+    
     await ids.forEach(element => {
         ObjId.push(ObjectId(element))
     });

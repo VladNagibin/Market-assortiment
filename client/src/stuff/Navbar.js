@@ -28,22 +28,7 @@ export default function Navbar() {
         var data = await request('/api/getCategory?id=' + id)
         setCategories(data.result)
     }
-    function drawCategories() {
-        if (drawedCategories.length) {
-            return (
-                <div className='container'>
-                    <div className='row'>
-                        <TreeOfCategories categories={drawedCategories} />
-                    </div>
-                </div>
-            )
-        } else {
-            return (
-                <>
-                </>
-            )
-        }
-    }
+   
     useEffect(() => {
         getCategories(0)
     }, [])
