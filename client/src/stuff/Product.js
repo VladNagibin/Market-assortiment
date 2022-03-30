@@ -1,10 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-export default function Product({ product, cart,stQuantity=0 }) {
+export default function Product({ product, cart}) {
   const auth = useContext(AuthContext)
-  const [quantity, setQuantity] = useState(stQuantity)
-  
+  const [quantity, setQuantity] = useState(0)
+  async function getQuantity(){
+    var cartProd = await auth.cart.find(el=>el.id=product._id)
+    if(cartProd ==undefined){
+      setQuantity(0) 
+    }else{
+      setQuantity(cartProd.quantity)
+    }
+  }
   function plusCart(){
     setQuantity(quantity+1)
   }
@@ -22,10 +29,11 @@ export default function Product({ product, cart,stQuantity=0 }) {
     }else{
       auth.addInCart(product._id,quantity)
     }
+    getQuantity()
     
-  },[])
+  },[quantity])
   return (
-    <div className='card hoverable' id={product._id}>
+    <div className='card hoverable product' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
         <Link to={'/detail/' + product._id}><img src={product.image} className='activator responsive-img' alt='product' /></Link>
       </div>
@@ -42,7 +50,7 @@ export default function Product({ product, cart,stQuantity=0 }) {
         <div className='second center-align row'>
           <div className='cart-adding'>
             <i className="material-icons prefix waves-effect col s3 plus-minus" onClick={minusCart}>remove</i>
-            <input readOnly id="last_name" type="text" className="validate col s6 " value={quantity}/>
+            <span className="plus-minus-text col s6 ">{quantity}</span>
             <i className="material-icons prefix waves-effect right col s3 plus-minus" onClick={plusCart}>add</i>
             </div>
         </div>

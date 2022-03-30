@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { useHttp } from '../hooks/http.hook'
 
 import Categories from './Categories'
 export default function TreeOfCategories({ categories }) {
-    const { request, loading } = useHttp()
     const [childCategories, updateChildCategories] = useState([])
     async function openChild(categories) {
         updateChildCategories(categories)
@@ -14,7 +12,7 @@ export default function TreeOfCategories({ categories }) {
     function drawchildCategories() {
         if (childCategories.length) {
             return (
-                <div className='col s2 offset-s3 collection white childCategories'>
+                <div className='col s5 l2 offset-s5 offset-l3 collection white childCategories'>
                     <Categories categories={childCategories} openChild={openChild} parent={false} />
                 </div>
             )
@@ -26,7 +24,7 @@ export default function TreeOfCategories({ categories }) {
     return (
         <>
             <div onMouseLeave={destroyChildCategories}>
-                <div className='col s2 offset-s1 collection white childCategories'>
+                <div className='col s5 l2 offset-l1 collection white childCategories'>
                     <Categories categories={categories} openChild={openChild} parent={true} />
                 </div>
                 {drawchildCategories()}

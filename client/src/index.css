@@ -33,6 +33,7 @@ ul.hr li {
 
 .nav-buttons {
     left: 50px;
+
 }
 
 .nav-search {
@@ -66,9 +67,11 @@ nav {
 .first {
     flex: 3;
 }
-.space{
-    flex:1;
+
+.space {
+    flex: 1;
 }
+
 .second {
     flex: 7;
 }
@@ -164,11 +167,14 @@ nav {
     color: #000000;
 }
 
-.footer-copyright {
+
+.footer-links {
     height: 100px;
     background-color: #374F64 !important;
 }
-
+.product:hover{
+    background: rgba(74, 108, 138, 0.09);
+}
 .footer-text-white {
     font-family: 'Roboto';
     font-style: normal;
@@ -202,10 +208,33 @@ nav {
     display: block;
     background: blue;
 }
-.cart-adding{
+
+.cart-adding {
     margin-top: 10px;
 }
-.plus-minus{
+
+.plus-minus {
     margin-top: 10px;
     
+}
+.plus-minus-text{
+    margin-top: 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+
+}
+
+.menu-icon {
+    color: blue;
+    margin-left: 15px;
+}
+
+.nav-butt {
+    margin-left: 15px;
+}
+.footer-low-panel{
+    margin-top: 20px;
 }

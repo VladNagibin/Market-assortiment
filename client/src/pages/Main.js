@@ -9,27 +9,38 @@ export default function Main() {
   const popularProductsId = ['61f63f647efacc392a1ae510', '61f63f677efacc392a1ae514', '61f63f687efacc392a1ae516', '61f63f697efacc392a1ae524', '61f63f697efacc392a1ae528', '61f63f6a7efacc392a1ae52e']
   const { request } = useHttp()
   const [popularProducts, updatePopularProducts] = useState([])
-  function PrevArrow(props){
-    const {className,style,onClick}= props
-    return(
-      <div
-      className={className}
-      style={{...style,display:'block',color:'blue'}}
-      onClick={onClick}
-    ><i className="material-icons">chevron_left</i></div>
-  )
+  const windowInnerWidth=window.innerWidth
+  const slidesToShow = countSlides()
+  function countSlides(){
+    if(windowInnerWidth>992){
+      return 3
+    }else if(windowInnerWidth>600){
+      return 2
+    }else{
+      return 1
+    }
   }
-  function NextArrow(props){
-    const {className,style,onClick}= props
-    return(
+  function PrevArrow(props) {
+    const { className, style, onClick } = props
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block', color: 'blue' }}
+        onClick={onClick}
+      ><i className="material-icons">chevron_left</i></div>
+    )
+  }
+  function NextArrow(props) {
+    const { className, style, onClick } = props
+    return (
       //
       <div
         className={className}
-        style={{...style,display:'block',color:'blue'}}
+        style={{ ...style, display: 'block', color: 'blue' }}
         onClick={onClick}
       ><i className="material-icons">chevron_right</i></div>
     )
-    
+
   }
   async function getPopular() {
     var data = await request('/api/Product', 'POST', {
@@ -44,17 +55,16 @@ export default function Main() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     //autoplay: true,
-     nextArrow:<NextArrow/>,
+    nextArrow: <NextArrow />,
 
-     //,
+    //,
 
-     prevArrow:<PrevArrow/>
+    prevArrow: <PrevArrow />
   }
-
-  useEffect(async () => {
+  useEffect(() => {
     getPopular()
   }, [])
   return (
@@ -134,13 +144,13 @@ export default function Main() {
       <div className='row'>
         <div className='col s8 offset-s2 podpiska-rectangle'>
           <div className='podpiska-div'>
-          <span className='white-text podpiska-text'>Будьте в курсе нашей актуальной информации!</span>
+            <span className='white-text podpiska-text'>Будьте в курсе нашей актуальной информации!</span>
           </div>
-          
-          <div className="input-field col s8">
-            <input placeholder="moshnayaPochta@mail.ru" id="mail" type="text" className="validate  white"/>
+
+          <div className="input-field col s12 l7 xl8">
+            <input placeholder="moshnayaPochta@mail.ru" id="mail" type="text" className="validate  white" />
           </div>
-          <div className='col s4'>
+          <div className='col s12 l5 xl4'>
             <a className='podpiska-button waves-effect waves-light btn indigo darken-3'>Подписаться</a>
           </div>
         </div>
