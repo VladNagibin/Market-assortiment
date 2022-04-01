@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-export default function Product({ product, cart}) {
+export default function Product({ product}) {
   const auth = useContext(AuthContext)
   const [quantity, setQuantity] = useState(0)
   async function getQuantity(){
-    var cartProd = await auth.cart.find(el=>el.id=product._id)
+    var cartProd = await auth.cart.find((el)=>el._id===product._id)
     if(cartProd ==undefined){
       setQuantity(0) 
     }else{
@@ -13,25 +13,27 @@ export default function Product({ product, cart}) {
     }
   }
   function plusCart(){
+    auth.addInCart(product,quantity+1)
     setQuantity(quantity+1)
   }
   function minusCart(){
     if(quantity>0){
-      setQuantity(quantity-1)
+      if(quantity==1){
+        auth.deleteFromCart(product._id)
+        setQuantity(0)
+      }else{
+        auth.addInCart(product,quantity)
+        setQuantity(quantity-1)
+      }
     }else{
+      auth.deleteFromCart(product._id)
       setQuantity(0)
     }
      
   }
   useEffect(()=>{
-    if(quantity==0){
-      auth.deleteFromCart(product._id)
-    }else{
-      auth.addInCart(product._id,quantity)
-    }
     getQuantity()
-    
-  },[quantity])
+  },[])
   return (
     <div className='card hoverable product' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
