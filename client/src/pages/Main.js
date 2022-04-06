@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import $ from 'jquery'
 import { useHttp } from '../hooks/http.hook'
-import Products from '../stuff/Products'
 import Product from '../stuff/Product'
 import Slider from 'react-slick'
 export default function Main() {
   const popularProductsId = ['61f63f647efacc392a1ae510', '61f63f677efacc392a1ae514', '61f63f687efacc392a1ae516', '61f63f697efacc392a1ae524', '61f63f697efacc392a1ae528', '61f63f6a7efacc392a1ae52e']
   const { request } = useHttp()
   const [popularProducts, updatePopularProducts] = useState([])
-  const windowInnerWidth=window.innerWidth
+  const windowInnerWidth = window.innerWidth
   const slidesToShow = countSlides()
-  function countSlides(){
-    if(windowInnerWidth>992){
+  function countSlides() {
+    if (windowInnerWidth > 992) {
       return 3
-    }else if(windowInnerWidth>600){
+    } else if (windowInnerWidth > 600) {
       return 2
-    }else{
+    } else {
       return 1
     }
   }
@@ -48,9 +46,6 @@ export default function Main() {
     })
     updatePopularProducts(data.result)
   }
-  function mainBannerOnClick() {
-    alert('Сосать будешь?')
-  }
   var settings = {
     dots: true,
     infinite: true,
@@ -67,13 +62,14 @@ export default function Main() {
   useEffect(() => {
     getPopular()
   }, [])
+  ///catalog/171
   return (
     <div className='container'>
       <div className='row'>
         <div className='col s12'>
           <div className='card'>
             <div className='card-image hoverable '>
-              <img onClick={mainBannerOnClick} src='banner-first-main.png'></img>
+              <NavLink to='/catalog/171'><img src='banner-first-main.png'></img></NavLink>
             </div>
 
           </div>

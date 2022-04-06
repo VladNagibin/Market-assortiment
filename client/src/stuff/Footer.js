@@ -16,7 +16,7 @@ export default function Footer() {
                 <div className='col l2 m8 offset-m4 hide-on-small-only'>
                     <span className='footer-text right-align'>+79059216808</span>
                     <br className='hide-on-med-and-down' />
-                    <span className='footer-text right-align'>piskaZdorovaya@mail.ru</span>
+                    <span className='footer-text right-align'>moshnayaPochta@mail.ru</span>
                 </div>
                 <div className='col s12 hide-on-med-and-up'>
                     <NavLink to='/' className='footer-text'><span>Доставка и оплата</span></NavLink>
@@ -38,7 +38,7 @@ export default function Footer() {
                 </div>
 
                 <div className='col s12 hide-on-med-and-up'>
-                    <span className='footer-text right-align'>piskaZdorovaya@mail.ru</span>
+                    <span className='footer-text right-align'>moshnayaPochta@mail.ru</span>
 
                 </div>
 

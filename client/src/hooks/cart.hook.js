@@ -2,6 +2,13 @@ import { useCallback, useState, useEffect } from "react"
 
 export const useCart = ()=>{
     const [cart,updateCart] = useState([])
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem('cart'))
+        if(data!=null){
+            updateCart(data)
+        }
+        
+    }, [])
     const addInCart = useCallback((product,quantity)=>{
         var foundedIndex = cart.findIndex((el)=>el._id===product._id)
         if(foundedIndex == -1){
@@ -22,24 +29,19 @@ export const useCart = ()=>{
             cartRed[foundedIndex].quantity = quantity
             updateCart(cartRed)
         }
-        
-    },[])
+        localStorage.setItem('cart', JSON.stringify(cartRed))
+    })
     const deleteFromCart = useCallback((id)=>{
         var foundedIndex = cart.findIndex((el)=>el._id===id)
         const newCart = [...cart.slice(0, foundedIndex), ...cart.slice(foundedIndex + 1)]
         //
         updateCart(newCart)
-    },[])
-    const deleteAll = useCallback(()=>{
+        localStorage.setItem('cart', JSON.stringify(newCart))
+    })
+    const deleteAll=useCallback(()=>{
         updateCart([])
         localStorage.removeItem('cart')
     })
-    useEffect(()=>{
-        localStorage.setItem('cart', JSON.stringify(cart))
-    },[cart])
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('cart'))
-        updateCart(data)
-    }, [])
+    
     return {cart,addInCart,deleteFromCart,deleteAll }
 }

@@ -1,39 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-export default function Product({ product}) {
+export default function Product({ product }) {
   const auth = useContext(AuthContext)
   const [quantity, setQuantity] = useState(0)
-  async function getQuantity(){
-    var cartProd = await auth.cart.find((el)=>el._id===product._id)
-    if(cartProd ==undefined){
-      setQuantity(0) 
-    }else{
+  async function getQuantity() {
+    if(auth.cart==null){
+      setQuantity(0)
+      return
+    }
+    var cartProd = await auth.cart.find((el) => el._id === product._id)
+    if (cartProd == undefined) {
+      setQuantity(0)
+    } else {
       setQuantity(cartProd.quantity)
     }
   }
-  function plusCart(){
-    auth.addInCart(product,quantity+1)
-    setQuantity(quantity+1)
+  function plusCart() {
+    var changedQuantuty = quantity + 1
+    if (changedQuantuty < product.min_quantity) {
+      changedQuantuty = product.min_quantity
+    }
+    auth.addInCart(product, changedQuantuty)
+    setQuantity(changedQuantuty)
   }
-  function minusCart(){
-    if(quantity>0){
-      if(quantity==1){
-        auth.deleteFromCart(product._id)
-        setQuantity(0)
-      }else{
-        auth.addInCart(product,quantity)
-        setQuantity(quantity-1)
-      }
-    }else{
+  function minusCart() {
+    var changedQuantuty = quantity - 1
+    if (changedQuantuty >= product.min_quantity) {
+      auth.addInCart(product, changedQuantuty)
+      setQuantity(changedQuantuty)
+
+    } else {
       auth.deleteFromCart(product._id)
       setQuantity(0)
     }
-     
+
   }
-  useEffect(()=>{
+  useEffect(() => {
     getQuantity()
-  },[])
+  }, [])
   return (
     <div className='card hoverable product' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
@@ -54,7 +59,7 @@ export default function Product({ product}) {
             <i className="material-icons prefix waves-effect col s3 plus-minus" onClick={minusCart}>remove</i>
             <span className="plus-minus-text col s6 ">{quantity}</span>
             <i className="material-icons prefix waves-effect right col s3 plus-minus" onClick={plusCart}>add</i>
-            </div>
+          </div>
         </div>
       </div>
       {/* <div className='card-content'>

@@ -17,7 +17,6 @@ export default function Navbar() {
         message("Выход выполнен")
 
     }
-
     function clickCatalog() {
         if (drawedCategories.length) {
             setDrawedCategories([])
@@ -106,7 +105,7 @@ export default function Navbar() {
                             <form className='grey lighten-3 nav-search'>
                                 <div className="input-field">
 
-                                    <input id="search" type="search" placeholder='Поиск епту' required />
+                                    <input id="search" type="search" placeholder='Поиск епту' required  />
 
                                 </div>
                             </form>

@@ -67,7 +67,7 @@ export default function Catalog() {
                     onPageChange={pageClickHandler}
                     pageCount={pageCount}
                     renderOnZeroPageCount={null}
-                    activeClassName="active"
+                    activeClassName="active blue"
                     className='col s12 center-align pagination'
                     pageClassName='waves-effect'
                 />
