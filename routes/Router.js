@@ -164,15 +164,22 @@ router.post("/Product",async (req,res)=>{
 router.get('/getCategoryName',(req,res)=>{
     const {id} = req.query
     if(id== '0'){
-        res.status(200).json({
-            message:'success',
-            name:'Каталог'
-        })
-    }else{
-        Category.findOne({Id:id}).lean().then(result=>{
+        var child = Category.find({parentId:id}).lean().then(result=>{
             res.status(200).json({
                 message:'success',
-                name:result.name
+                name:'Каталог',
+                child:result
+            })
+        })
+        
+    }else{
+        var category = Category.findOne({Id:id}).lean()
+        var child = Category.find({parentId:id}).lean()
+        Promise.all([category,child]).then(result=>{
+            res.status(200).json({
+                message:'success',
+                name:result[0].name,
+                child:result[1]
             })
         },
         err=>{
@@ -183,6 +190,17 @@ router.get('/getCategoryName',(req,res)=>{
         })
     }
     
+})
+router.get('/Finder',(req,res)=>{
+    const {text} = req.query
+    var reg = new RegExp(text)
+    Product.find({$or:[{name:reg},{description:reg},{barcode:reg}]}).lean().then(result=>{
+        res.status(200).json({
+            message:'success',
+            result:result
+        })
+    })
+
 })
 // router.post('/setChildCategories',(req,res)=>{
 //     Category.find().lean().then(data=>{

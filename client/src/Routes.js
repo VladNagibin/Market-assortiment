@@ -6,6 +6,7 @@ import Detail from './pages/Detail'
 import Catalog from './pages/Catalog'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Cart from './pages/Cart'
+import Finder from './pages/Finder'
 export const useRoutes = isAunteficated => {
     if (isAunteficated) {
         return (
@@ -15,6 +16,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/cart' exact element={<Cart />} />
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
+                <Route path='/finder/:text' element={<Finder />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>
         )
@@ -25,6 +27,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/auth' exact element={<Auth />} />
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
+                <Route path='/finder/:text' element={<Finder />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>)
     }

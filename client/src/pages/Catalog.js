@@ -5,17 +5,21 @@ import TreeOfCategories from '../stuff/TreeOfCategories'
 import Products from '../stuff/Products'
 import ReactPaginate from 'react-paginate'
 import { Link, useParams } from 'react-router-dom'
+import Categories from '../stuff/Categories'
+import TopCategories from '../stuff/TopCategories'
 export default function Catalog() {
     const { request, error, CleanErrors } = useHttp()
     const parid = useParams().id
     const [name, updateName] = useState()
     const message = useMessage()
     const [pageCount, updatePageCount] = useState(0)
+    const [childCategories,setChildCategories] = useState([])
     const [products, updateProducts] = useState([])
     const [drawedProducts, updateDrawedProducts] = useState([])
     function getCategoryName() {
         request('/api/getCategoryName?id=' + parid).then(data => {
             updateName(data.name)
+            setChildCategories(data.child)
         })
     }
     const pageClickHandler = (event) => {
@@ -60,8 +64,8 @@ export default function Catalog() {
         <div className='container'>
             <div className='row'>
                 <h1>{name}</h1>
-                <button><Link to={'/catalog/0'}>Домой</Link></button>
-                <br />
+                <TopCategories categories={childCategories}/>
+                <br/>
                 <Products products={drawedProducts} />
                 <ReactPaginate
                     onPageChange={pageClickHandler}
