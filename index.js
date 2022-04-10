@@ -5,7 +5,7 @@ const Cookies = require('cookies')
 const path = require('path')
 const app = express()
 
-
+const PORT = process.env.NODE_ENV ==='production'?80:5000
 app.use(express.json({extended:true}))
 //app.use(express.static(path.join(__dirname,'public')))
 app.use('/api',Router)
@@ -19,8 +19,8 @@ if(process.env.NODE_ENV ==='production'){
 async function start(){
     try{
         await mongoose.connect('mongodb+srv://Vlad:123@cluster0.zy9vv.mongodb.net/Database')
-        app.listen(5000,()=>{
-            console.log('back is online)')
+        app.listen(PORT,()=>{
+            console.log('server is online on '+PORT+')')
         })
     }catch(e){
 
