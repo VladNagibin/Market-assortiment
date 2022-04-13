@@ -52,7 +52,7 @@ export default function Catalog() {
         } else {
             cleanProducts()
         }
-    }, [parid,openProducts,getCategoryName])
+    }, [parid])
     useEffect(() => {
         //console.log(error)
         message(error)

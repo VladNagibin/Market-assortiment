@@ -61,7 +61,7 @@ export default function Main() {
   }
   useEffect(() => {
     getPopular()
-  }, [getPopular])
+  }, [])
   ///catalog/171
   return (
     <div className='container'>

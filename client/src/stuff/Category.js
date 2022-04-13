@@ -32,7 +32,7 @@ export default function Category({ category, openChild, parent }) {
     downChild()
    }
     
-  }, [downChild,parent])
+  }, [])
 
 
   return (

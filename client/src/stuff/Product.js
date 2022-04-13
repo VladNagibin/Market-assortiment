@@ -38,7 +38,7 @@ export default function Product({ product }) {
   }
   useEffect(() => {
     getQuantity()
-  }, [getQuantity])
+  })
   return (
     <div className='card hoverable product' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>
