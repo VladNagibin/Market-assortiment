@@ -9,10 +9,11 @@ export const useCart = ()=>{
         }
         
     }, [])
-    const addInCart = useCallback((product,quantity)=>{
+    const addInCart = (product,quantity)=>{
         var foundedIndex = cart.findIndex((el)=>el._id===product._id)
-        if(foundedIndex == -1){
-            var cartRed = cart
+        var cartRed
+        if(foundedIndex === -1){
+            cartRed = cart
             cartRed.push({
                 _id:product._id,
                 barcode:product.barcode,
@@ -25,23 +26,23 @@ export const useCart = ()=>{
             updateCart(cartRed)
             
         }else{   
-            var cartRed = cart
+            cartRed = cart
             cartRed[foundedIndex].quantity = quantity
             updateCart(cartRed)
         }
         localStorage.setItem('cart', JSON.stringify(cartRed))
-    })
-    const deleteFromCart = useCallback((id)=>{
+    }
+    const deleteFromCart = (id)=>{
         var foundedIndex = cart.findIndex((el)=>el._id===id)
         const newCart = [...cart.slice(0, foundedIndex), ...cart.slice(foundedIndex + 1)]
         //
         updateCart(newCart)
         localStorage.setItem('cart', JSON.stringify(newCart))
-    })
-    const deleteAll=useCallback(()=>{
+    }
+    const deleteAll=()=>{
         updateCart([])
         localStorage.removeItem('cart')
-    })
+    }
     
     return {cart,addInCart,deleteFromCart,deleteAll }
 }

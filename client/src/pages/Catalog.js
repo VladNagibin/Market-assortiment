@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
-import TreeOfCategories from '../stuff/TreeOfCategories'
 import Products from '../stuff/Products'
 import ReactPaginate from 'react-paginate'
-import { Link, useParams } from 'react-router-dom'
-import Categories from '../stuff/Categories'
+import { useParams } from 'react-router-dom'
 import TopCategories from '../stuff/TopCategories'
 export default function Catalog() {
     const { request, error, CleanErrors } = useHttp()
@@ -54,12 +52,12 @@ export default function Catalog() {
         } else {
             cleanProducts()
         }
-    }, [parid])
+    }, [parid,openProducts,getCategoryName])
     useEffect(() => {
         //console.log(error)
         message(error)
         CleanErrors()
-    }, [error, CleanErrors])
+    }, [error, CleanErrors,message])
     return (
         <div className='container'>
             <div className='row'>

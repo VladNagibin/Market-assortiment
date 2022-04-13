@@ -29,7 +29,7 @@ export default function Cab() {
   },[error,CleanErrors,message])
   useEffect(()=>{
       checkToken() 
-  },[])
+  },[checkToken])
 
   return (
     <div>

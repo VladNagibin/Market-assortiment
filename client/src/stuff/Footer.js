@@ -6,7 +6,7 @@ export default function Footer() {
 
             <div className="row">
                 <div className='col l2 offset-xl1 m4 hide-on-small-only'>
-                    <img src='logo1.png' />
+                    <img src='logo1.png' alt='logo'/>
                 </div>
                 <div className='col l6 offset-l1 m8 hide-on-small-only'>
                     <NavLink to='/' className='footer-text'><span>Доставка и оплата</span></NavLink>

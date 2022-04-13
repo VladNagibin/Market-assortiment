@@ -9,7 +9,7 @@ export default function ProductInCart({product}) {
                     <p>{product.barcode} <br/>
                         {product.price+'p'}
                     </p>
-                    <a className="secondary-content">{product.quantity}</a>
+                    <span className="secondary-content">{product.quantity}</span>
             </li>
     )
 }

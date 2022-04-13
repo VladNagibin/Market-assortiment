@@ -5,7 +5,7 @@ export default function Product({ product }) {
   const auth = useContext(AuthContext)
   const [quantity, setQuantity] = useState(0)
   async function getQuantity() {
-    if(auth.cart==null){
+    if(auth.cart===null){
       setQuantity(0)
       return
     }
@@ -38,7 +38,7 @@ export default function Product({ product }) {
   }
   useEffect(() => {
     getQuantity()
-  }, [])
+  }, [getQuantity])
   return (
     <div className='card hoverable product' id={product._id}>
       <div className='card-image waves-effect waves-block waves-light'>

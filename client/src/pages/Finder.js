@@ -9,7 +9,7 @@ export default function Finder() {
     const [foundedProducts, setFoundedProducts] = useState([])
     useEffect(() => {
         updateFoundedProducts()
-    }, [])
+    }, [updateFoundedProducts])
     function loader(){
         if (loading) {
             return (

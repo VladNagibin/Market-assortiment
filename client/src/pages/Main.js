@@ -61,15 +61,15 @@ export default function Main() {
   }
   useEffect(() => {
     getPopular()
-  }, [])
+  }, [getPopular])
   ///catalog/171
   return (
     <div className='container'>
       <div className='row'>
         <div className='col s12'>
           <div className='card'>
-            <div className='card-image hoverable '>
-              <NavLink to='/catalog/171'><img src='banner-first-main.png'></img></NavLink>
+            <div className='card-image hoverable'>
+              <NavLink to='/catalog/171'><img src='banner-first-main.png' alt='banner-main'></img></NavLink>
             </div>
 
           </div>
@@ -82,7 +82,7 @@ export default function Main() {
         <div className='col s3'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable '>
-              <NavLink to='/catalog/21'><img src='Sad_i_dacha_category.png'></img></NavLink>
+              <NavLink to='/catalog/21'><img src='Sad_i_dacha_category.png' alt='banner-sad'></img></NavLink>
             </div>
 
           </div>
@@ -90,7 +90,7 @@ export default function Main() {
         <div className='col s5'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable '>
-              <NavLink to='/catalog/141'><img src='kancelarya_category.png'></img></NavLink>
+              <NavLink to='/catalog/141'><img src='kancelarya_category.png' alt='banner-kancelarya'></img></NavLink>
             </div>
 
           </div>
@@ -98,7 +98,7 @@ export default function Main() {
         <div className='col s4'>
           <div className='card main-banners'>
             <div className='card-image  main-banners hoverable'>
-              <NavLink to='/catalog/114'><img src='himiya_category.png'></img></NavLink>
+              <NavLink to='/catalog/114'><img src='himiya_category.png' alt='banner-himiya'></img></NavLink>
             </div>
 
           </div>
@@ -108,14 +108,14 @@ export default function Main() {
         <div className='col s4'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable'>
-              <NavLink to='/catalog/22'><img src='dlya_detei_category.png'></img></NavLink>
+              <NavLink to='/catalog/22'><img src='dlya_detei_category.png' alt='banner-dlya_detei'></img></NavLink>
             </div>
           </div>
         </div>
         <div className='col s8'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable'>
-              <NavLink to='/catalog/130'><img src='tekstil_category.png'></img></NavLink>
+              <NavLink to='/catalog/130'><img src='tekstil_category.png'  alt='banner-tekstil'></img></NavLink>
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function Main() {
             <input placeholder="moshnayaPochta@mail.ru" id="mail" type="text" className="validate  white" />
           </div>
           <div className='col s12 l5 xl4'>
-            <a className='podpiska-button waves-effect waves-light btn indigo darken-3'>Подписаться</a>
+            <a className='podpiska-button waves-effect waves-light btn indigo darken-3' href='/'>Подписаться</a>
           </div>
         </div>
 

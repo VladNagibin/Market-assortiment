@@ -39,7 +39,7 @@ export default function Navbar() {
         getCategories(0)
         var elems = document.querySelectorAll('.sidenav');
         window.M.Sidenav.init(elems, {});
-    }, [])
+    }, [getCategories])
     
     //<span className="badge nav-kek">{(auth.cart != null) ? auth.cart.length : 0}</span>
     function smallButtons() {
@@ -106,7 +106,7 @@ export default function Navbar() {
                             <NavLink className="brand-logo left"  to='/'><img className='logo' alt='logo' src='logo1.png'></img></NavLink>
                         </div>
                         <div className="col s3 m2 xl1">
-                            <a className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</a>
+                            <button className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</button>
                         </div>
                         <a href="#" data-target="mobile-demo" className="sidenav-trigger hide-on-med-and-up"><i className="material-icons menu-icon">menu</i></a>
                         <div className='col l2 xl4 hide-on-med-and-down'>

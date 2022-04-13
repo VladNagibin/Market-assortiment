@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { useHttp } from '../hooks/http.hook'
-import Product from '../stuff/Product'
 import ProductInCart from '../stuff/ProductInCart'
 export default function Cart() {
     const auth = useContext(AuthContext)
-    const { request } = useHttp()
     const [products, updateProducts] = useState([])
     useEffect(() => {
         updateProducts(auth.cart)

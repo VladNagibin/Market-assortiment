@@ -5,7 +5,7 @@ const Cookies = require('cookies')
 const path = require('path')
 const app = express()
 
-const PORT = process.env.NODE_ENV ==='production'?80:5000
+const PORT =process.env.NODE_ENV ==='production'?80:5000
 app.use(express.json({extended:true}))
 //app.use(express.static(path.join(__dirname,'public')))
 app.use('/api',Router)
