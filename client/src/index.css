@@ -172,9 +172,11 @@ nav {
     height: 100px;
     background-color: #374F64 !important;
 }
-.product:hover{
+
+.product:hover {
     background: rgba(74, 108, 138, 0.09);
 }
+
 .footer-text-white {
     font-family: 'Roboto';
     font-style: normal;
@@ -215,9 +217,10 @@ nav {
 
 .plus-minus {
     margin-top: 10px;
-    
+
 }
-.plus-minus-text{
+
+.plus-minus-text {
     margin-top: 10px;
     font-family: 'Roboto';
     font-style: normal;
@@ -235,9 +238,77 @@ nav {
 .nav-butt {
     margin-left: 15px;
 }
-.footer-low-panel{
+
+.footer-low-panel {
     margin-top: 20px;
 }
-.badge-catalog{
+
+.badge-catalog {
     margin-top: 6px;
+}
+
+/* detail */
+.barcode-detail {
+    width: 117px;
+    height: 47px;
+    background: #585858;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.barcode-detail-text {
+    margin-left: 10px;
+}
+
+.name-detail {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 29px;
+
+    color: #000000;
+}
+
+.img-detail {
+    width: 100px;
+}
+
+.stats-detail {
+    border: 1px solid #727272;
+    border-radius: 5px;
+    padding: 30px, 30px, 30px, 30px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.detail-desc-info {
+    background: #F4F4F4;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.detail-desc {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: #2C2C2C;
 }
