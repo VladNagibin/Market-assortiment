@@ -39,7 +39,7 @@ export default function Navbar() {
         getCategories(0)
         var elems = document.querySelectorAll('.sidenav');
         window.M.Sidenav.init(elems, {});
-    }, [getCategories])
+    },[])
     
     //<span className="badge nav-kek">{(auth.cart != null) ? auth.cart.length : 0}</span>
     function smallButtons() {

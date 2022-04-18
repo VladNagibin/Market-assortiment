@@ -4,6 +4,7 @@ import { useHttp } from '../hooks/http.hook'
 
 export default function Detail() {
   const { request } = useHttp()
+  const [displayedPicture, setDisplayedPicture] = useState('')
   const [product, setProduct] = useState({
     name: '',
     price: 0,
@@ -29,6 +30,7 @@ export default function Detail() {
       parameters:data.parameters,
       description:data.description
     })
+    setDisplayedPicture(data.image)
   }
   useState(() => {
     getProduct()
@@ -63,12 +65,17 @@ export default function Detail() {
           })}
         </div>
         <div className='col s5'>
-          <img src={product.image}/>
+          <img src={displayedPicture}/>
         </div>
         <div className='col s5 stats-detail'>
-          <span>Технические характеристики</span>
+          <div className='name-stat-detail'>
+            <span >Технические характеристики</span>
+          </div>
+          
           {product.parameters.map(elem=>{
-            return(<div key={elem}><br/><span>{elem}</span></div>)
+            var statName = elem.slice(0,elem.indexOf('='))
+            var statValue = elem.slice(elem.indexOf('=')+1,elem.length)
+            return(<div className='one-stat-detail row' key={elem}><div className='stat-name-detail col s6'>{statName}</div><div className='stat-value-detail col s6'>{statValue}</div></div>)
           })
 
           }
@@ -80,7 +87,7 @@ export default function Detail() {
           <span>{product.description}</span>
         </div>
         <div className='col s6 detail-desc-info'>
-          <span>Товары представлены в ассортименте, выбор цветов или моделей не предоставляется. На фотографиях могут быть представлены не все варианты.</span>
+          <div className='desc-info'>Товары представлены в ассортименте, выбор цветов или моделей не предоставляется. На фотографиях могут быть представлены не все варианты.</div>
         </div>
       </div>
     </div>
