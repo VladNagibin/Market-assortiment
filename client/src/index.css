@@ -354,7 +354,90 @@ nav {
     color: #000000;
 
 }
-.detail-main-pic{
+
+.detail-main-pic {
     width: 100%;
     height: auto;
+}
+
+.detail-line {
+    border: 3px solid #5285B4;
+}
+
+/* _______________cart___________________cock */
+
+.cart-text-all {
+    font-family: 'Roboto';
+    font-style: normal;
+}
+
+.cart-header {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.cart-pic {
+    width: 100%;
+    height: auto;
+}
+
+.flex-container-cart {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.price-cart {
+    flex: 3;
+}
+
+.plus-minus-cart {
+    flex: 7;
+}
+
+.destroy-cart {
+    flex: 2;
+}
+
+.clear-cart {
+    margin-top: 19px;
+    margin-left: 40px;
+}
+
+.cart-name {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.cart-sklad {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #868686;
+}
+
+.cart-text {
+    margin-top: 5px;
+}
+
+.summ-cart {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+
+    color: #B6B6B6;
+}
+.product-in-cart{
+    border-bottom: 1px solid #A5A5A5;
 }

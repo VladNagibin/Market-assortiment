@@ -103,7 +103,7 @@ export default function Navbar() {
                 <div className="nav-wrapper white">
                     <div className='row'>
                         <div className='col s6 m4 l3 xl2 offset-xl1'>
-                            <NavLink className="brand-logo left"  to='/'><img className='logo' alt='logo' src='logo1.png'></img></NavLink>
+                            <NavLink className="brand-logo left"  to='/'><img className='logo' alt='logo' src='/logo1.png'></img></NavLink>
                         </div>
                         <div className="col s3 m2 xl1">
                             <button className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</button>

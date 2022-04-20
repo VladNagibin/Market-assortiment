@@ -29,6 +29,7 @@ export default function Detail() {
       return
     }
     var cartProd = await auth.cart.find((el) => el._id === product._id)
+    console.log(cartProd)
     if (cartProd == undefined) {
       setQuantity(0)
     } else {
@@ -72,6 +73,7 @@ export default function Detail() {
     })
     setDisplayedPicture(data.image)
     getSimilar(data.name)
+    getQuantity(data._id)
   }
   function getSimilar(name) {
     var firstWord = name.slice(0, name.indexOf(' '))
@@ -91,9 +93,6 @@ export default function Detail() {
   useState(() => {
     getProduct()
   }, [productId])
-  useEffect(() => {
-    getQuantity()
-  })
   
   return (
     <div className='container detail'>
@@ -139,6 +138,8 @@ export default function Detail() {
           })
 
           }
+          <div className='detail-line'>
+          </div>
           <div className="card-action flex-container">
             <div className='first center-align'>
               <p className='price-text'>{product.price + 'P'}</p>

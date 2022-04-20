@@ -9,18 +9,18 @@ export default function Cart() {
     }, [auth.cart])
 
     return (
-        <>
-            <h1>Корзина</h1>
+        <div className='container cart-text-all'>
+            <span className='cart-header'>В корзине {products.length} товаров</span>
             <div className='row'>
-            <ul className="collection">
-            {products.map(product => {
-                return <ProductInCart product={product} key={product._id} />
-            })}
-            </ul>
+
+                {products.map(product => {
+                    return <ProductInCart product={product} key={product._id} />
+                })}
+
             </div>
             <button onClick={auth.deleteAll}>Очистить</button>
             <button>Заказать</button>
 
-        </>
+        </div>
     )
 }
