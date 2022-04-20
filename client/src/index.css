@@ -248,12 +248,16 @@ nav {
 }
 
 /* detail */
+.detail {
+    font-family: 'Roboto';
+    font-style: normal;
+}
+
 .barcode-detail {
     width: 117px;
     height: 47px;
     background: #585858;
-    font-family: 'Roboto';
-    font-style: normal;
+
     font-weight: 700;
     font-size: 18px;
     line-height: 23px;
@@ -267,8 +271,6 @@ nav {
 }
 
 .name-detail {
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 29px;
@@ -284,8 +286,6 @@ nav {
     border: 1px solid #727272;
     border-radius: 5px;
     padding: 30px 30px 30px 30px;
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
@@ -303,45 +303,58 @@ nav {
 }
 
 .detail-desc {
-    font-family: 'Roboto';
-    font-style: normal;
+    margin-top: 30px;
     font-weight: 400;
     font-size: 14px;
     line-height: 21px;
 
     color: #2C2C2C;
 }
-.one-stat-detail{
-    margin: 20px,;
+
+
+.one-stat-detail {
+    margin: 20px, ;
 }
-.stat-name-detail{
+
+.stat-name-detail {
     text-align: left;
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
 
 
-color: #262626;
+    color: #262626;
 }
-.stat-value-detail{
+
+.stat-value-detail {
     text-align: right;
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
 
 
-color: #262626;
+    color: #262626;
 }
 
-.name-stat-detail{
+.name-stat-detail {
     margin: 30px;
 }
-.desc-info{
+
+.desc-info {
     margin: 10px;
+}
+
+.detail-opisanie {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 29px;
+
+    color: #000000;
+
+}
+.detail-main-pic{
+    width: 100%;
+    height: auto;
 }

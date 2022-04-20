@@ -1,64 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useHttp } from '../hooks/http.hook'
-import Product from '../stuff/Product'
-import Slider from 'react-slick'
+import ProductSlider from '../stuff/ProductSlider'
 export default function Main() {
   const popularProductsId = ['61f63f647efacc392a1ae510', '61f63f677efacc392a1ae514', '61f63f687efacc392a1ae516', '61f63f697efacc392a1ae524', '61f63f697efacc392a1ae528', '61f63f6a7efacc392a1ae52e']
   const { request } = useHttp()
   const [popularProducts, updatePopularProducts] = useState([])
-  const windowInnerWidth = window.innerWidth
-  const slidesToShow = countSlides()
-  function countSlides() {
-    if (windowInnerWidth > 992) {
-      return 3
-    } else if (windowInnerWidth > 600) {
-      return 2
-    } else {
-      return 1
-    }
-  }
-  function PrevArrow(props) {
-    const { className, style, onClick } = props
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: 'block', color: 'blue' }}
-        onClick={onClick}
-      ><i className="material-icons">chevron_left</i></div>
-    )
-  }
-  function NextArrow(props) {
-    const { className, style, onClick } = props
-    return (
-      //
-      <div
-        className={className}
-        style={{ ...style, display: 'block', color: 'blue' }}
-        onClick={onClick}
-      ><i className="material-icons">chevron_right</i></div>
-    )
-
-  }
+  
   async function getPopular() {
     var data = await request('/api/Product', 'POST', {
       ids: popularProductsId
     })
     updatePopularProducts(data.result)
   }
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: slidesToShow,
-    slidesToScroll: 1,
-    //autoplay: true,
-    nextArrow: <NextArrow />,
-
-    //,
-
-    prevArrow: <PrevArrow />
-  }
+  
   useEffect(() => {
     getPopular()
   }, [])
@@ -124,18 +79,7 @@ export default function Main() {
         <h1 className='right-align headers-main'>Популярные товары</h1>
       </div>
       <div className='row'>
-        <Slider {...settings}>
-          {
-            popularProducts.map(product => {
-              return (
-                <div key={product._id} className='carousel-card'>
-                  <Product product={product} cart={false} />
-                </div>
-                //<a className="carousel-item" href={'#'+product._id} key={product._id}><img src={product.image}/></a>
-              )
-            })
-          }
-        </Slider>
+        <ProductSlider products={popularProducts}/>
       </div>
       <div className='row'>
         <div className='col s8 offset-s2 podpiska-rectangle'>

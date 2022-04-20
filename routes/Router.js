@@ -202,6 +202,17 @@ router.get('/Finder',(req,res)=>{
     })
 
 })
+router.get('/FinderTop10',(req,res)=>{
+    const {text} = req.query
+    var reg = new RegExp(text)
+    Product.find({$or:[{name:reg},{description:reg},{barcode:reg}]}).limit(10).lean().then(result=>{
+        res.status(200).json({
+            message:'success',
+            result:result
+        })
+    })
+
+})
 // router.post('/setChildCategories',(req,res)=>{
 //     Category.find().lean().then(data=>{
 //         var vsego = data.length
