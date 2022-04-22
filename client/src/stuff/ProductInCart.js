@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 
 export default function ProductInCart({ product }) {
     const auth = useContext(AuthContext)
-    const [quantity,setQuantity] = useState(product.quantity)
+    const [quantity, setQuantity] = useState(product.quantity)
     function plusCart() {
         var changedQuantuty = quantity + 1
         if (changedQuantuty < product.min_quantity) {
@@ -25,15 +25,19 @@ export default function ProductInCart({ product }) {
         }
 
     }
-    function deleteFromCart(){
+    function deleteFromCart() {
         auth.deleteFromCart(product._id)
     }
     return (
         <div className='row product-in-cart'>
-            <div className='col s1'>
-                <Link to={'/detail/' + product._id}><img src={product.image} alt={product._id} className="cart-pic" /></Link>
+            <div className='col s2'>
+                <div className='row'>
+                    <div className='col s10'>
+                        <Link to={'/detail/' + product._id}><img src={product.image} alt={product._id} className="cart-pic" /></Link>
+                    </div>
+                </div>
             </div>
-            <div className='col s7'>
+            <div className='col s6'>
                 <div className='cart-text'>
                     <span className="cart-name">{product.name}</span>
                 </div>
@@ -57,7 +61,7 @@ export default function ProductInCart({ product }) {
                             <i className="material-icons prefix waves-effect right col s3 plus-minus" onClick={plusCart}>add</i>
                         </div>
                         <div className='row'>
-                            <span className='summ-cart'>{''+Math.round(quantity*product.price*100)/100 +'p'}</span>
+                            <span className='summ-cart'>{'' + Math.round(quantity * product.price * 100) / 100 + 'p'}</span>
                         </div>
                     </div>
                     <div className='destroy-cart'>

@@ -361,7 +361,7 @@ nav {
 }
 
 .detail-line {
-    border: 3px solid #5285B4;
+    border-top: 6px solid #5285B4;
 }
 
 /* _______________cart___________________cock */
@@ -376,6 +376,8 @@ nav {
     font-size: 25px;
     line-height: 29px;
     color: #000000;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .cart-pic {
@@ -391,6 +393,7 @@ nav {
 
 .price-cart {
     flex: 3;
+    margin-right: 20px;
 }
 
 .plus-minus-cart {
@@ -438,6 +441,89 @@ nav {
 
     color: #B6B6B6;
 }
-.product-in-cart{
+
+.product-in-cart {
     border-bottom: 1px solid #A5A5A5;
+}
+
+.cart-price-sp {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 29px;
+    color: #000000;
+
+}
+
+.cart-price-num {
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.cart-price-comm {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+
+    color: #969292;
+}
+
+.cart-price-info {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    /* identical to box height */
+
+
+    color: #554F4F;
+}
+
+.cart-promocode {
+    background: #EBEBEB;
+    border-radius: 5px;
+}
+
+.cart-promocode-btn {
+    background: #374F64;
+    border-radius: 5px;
+    height: 60px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 60px;
+
+
+
+}
+
+.cart-clean-btn {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 15px;
+
+    color: #FFFFFF;
+
+
+}
+
+/*___________DELIVERY_______________*/
+.delivery-header {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 29px;
+
+    color: #000000;
+
+}
+
+.delivery-order-block {
+    border: 1px solid #404040;
+    box-sizing: border-box;
+    border-radius: 10px;
 }

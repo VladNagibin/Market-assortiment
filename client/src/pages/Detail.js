@@ -24,7 +24,7 @@ export default function Detail() {
   const auth = useContext(AuthContext)
   const [quantity, setQuantity] = useState(0)
   async function getQuantity() {
-    if(auth.cart===null){
+    if (auth.cart === null) {
       setQuantity(0)
       return
     }
@@ -56,7 +56,7 @@ export default function Detail() {
     }
 
   }
-  
+
   async function getProduct() {
     const dataAll = await request('/api/product?id=' + productId)
     const data = dataAll.result
@@ -74,6 +74,10 @@ export default function Detail() {
     setDisplayedPicture(data.image)
     getSimilar(data.name)
     getQuantity(data._id)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
   function getSimilar(name) {
     var firstWord = name.slice(0, name.indexOf(' '))
@@ -83,17 +87,17 @@ export default function Detail() {
       console.log(result.length)
     })
   }
-  const pictOnClick = event =>{
+  const pictOnClick = event => {
     setDisplayedPicture(event.target.currentSrc)
   }
   async function findSimiar(text) {
     var data = await request('/api/FinderTop10?text=' + text)
     return data.result
   }
-  useState(() => {
+  useEffect(() => {
     getProduct()
   }, [productId])
-  
+
   return (
     <div className='container detail'>
       <div className='row'>
@@ -103,19 +107,6 @@ export default function Detail() {
         <div className='name-detail col s7' >
           <span>{product.name}</span>
         </div>
-        {/* <div className="card large">
-          <div className="card-image">
-            <img src={product.image} alt='product' />
-            <span className="card-title">{product.name}</span>
-          </div>
-          <div className="card-content">
-            <p>{product.price}</p>
-          </div>
-          <div className="card-action">
-            <button className='waves-effect waves-light btn' href="#">Купить</button>
-          </div>
-
-        </div> */}
       </div>
       <div className='row'>
         <div className='col s2'>
