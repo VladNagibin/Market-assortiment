@@ -25,6 +25,9 @@ ul.hr li {
 .catalog-button {
     border-radius: 10px;
     margin-top: 15px;
+    margin-left: 10px;
+    font-family: 'Roboto';
+    font-style: normal;
 }
 
 .nav-kek {
@@ -527,3 +530,27 @@ nav {
     box-sizing: border-box;
     border-radius: 10px;
 }
+
+.delivery-address-info {
+    border: 1px solid #404040;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    /* text-align: center; */
+
+    color: #000000;
+}
+
+.delivery-span {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* .delivery-input {
+    background: #EBEBEB;
+    border-radius: 10px;
+} */

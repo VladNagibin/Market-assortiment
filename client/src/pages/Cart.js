@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import ProductInCart from '../stuff/ProductInCart'
 import Promocode from '../stuff/Promocode'
@@ -66,7 +67,7 @@ export default function Cart() {
                                     <span className='center-align cart-clean-btn'>Очистить</span>
                                 </div>
                                 <div className='cart-promocode-btn'>
-                                    <span className='cart-clean-btn'>Заказать</span>
+                                    <Link to={'/delivery'}><span className='cart-clean-btn'>Заказать</span></Link>
                                 </div>
 
 
