@@ -8,6 +8,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Cart from './pages/Cart'
 import Finder from './pages/Finder'
 import Delivery from './pages/Delivery'
+import AdminCab from './pages/AdminCab'
 export const useRoutes = isAunteficated => {
     if (isAunteficated) {
         return (
@@ -19,6 +20,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
                 <Route path='/finder/:text' element={<Finder />} />
+                <Route path='/adminCab' element={<AdminCab />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>
         )
@@ -31,6 +33,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
                 <Route path='/finder/:text' element={<Finder />} />
+                <Route path='/adminCab' element={<AdminCab />} />
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>)
     }

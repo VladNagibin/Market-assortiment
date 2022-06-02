@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useHttp } from '../hooks/http.hook'
 import ProductSlider from '../stuff/ProductSlider'
 export default function Main() {
-  const popularProductsId = ['61f63f647efacc392a1ae510', '61f63f677efacc392a1ae514', '61f63f687efacc392a1ae516', '61f63f697efacc392a1ae524', '61f63f697efacc392a1ae528', '61f63f6a7efacc392a1ae52e']
+  const popularProductsId = ['629861d48879309757bffa28', '629861d48879309757bffa2b', '629861d48879309757bffa2c', '629861d48879309757bffa2d', '629861d48879309757bffa2e', '629861d48879309757bffa37']
   const { request } = useHttp()
   const [popularProducts, updatePopularProducts] = useState([])
   

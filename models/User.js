@@ -14,6 +14,9 @@ const schema = new Schema({
     },
     orders:{
         type:Array
+    },
+    num_of_orders:{
+        type:Number
     }   
 })
 module.exports = model('user', schema)

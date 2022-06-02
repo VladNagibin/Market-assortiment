@@ -45,7 +45,7 @@ export default function Product({ product }) {
         <Link to={'/detail/' + product._id}><img src={product.image} className='activator responsive-img' alt='product' /></Link>
       </div>
       <div className="card-content card-name-height">
-        <p className='barcode-text'>{product.barcode}</p>
+        <p className='barcode-text'>{product.articul}</p>
         <p className='name-text'>{product.name}</p>
       </div>
       <div className="card-action flex-container">

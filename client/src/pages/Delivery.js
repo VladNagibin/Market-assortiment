@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../context/AuthContext'
+import { useHttp } from '../hooks/http.hook'
+import { useMessage } from '../hooks/message.hook'
 
-export default function Delivery({ products }) {
+export default function Delivery() {
   const [userData, setUserData] = useState({
     street: '',
-    privateHouse: '',
+    privateHouse: false,
     flat: '',
     intercom: '',
     enterance: '',
@@ -15,8 +18,32 @@ export default function Delivery({ products }) {
     phone: ''
 
   })
+  const message = useMessage()
+  const auth = useContext(AuthContext)
+  const {request,loading} = useHttp()
   const changeForm = event => {
     setUserData({ ...userData, [event.target.name]: event.target.value })
+  }
+  async function createOrder(){
+    var data = await request('/api/createOrder','POST',{
+      userId:auth.userId,
+      userData:userData,
+      products:auth.cart
+    })
+    if(data.message =='success'){
+      message('Заказ создан')
+      auth.cart=[]
+    }else{
+      message('Произошла ошибка')
+    }
+  }
+
+  function setPrivateHouse(){
+    if(userData.privateHouse){
+      setUserData({...userData,privateHouse:false})
+    }else{
+      setUserData({...userData,privateHouse:true}) 
+    }
   }
   return (
     <div className='container'>
@@ -34,7 +61,7 @@ export default function Delivery({ products }) {
                   <div className='col s4 offset-s4'>
                     <div className="switch">
                       <label>
-                        <input type="checkbox" value={userData.privateHouse} onChange={changeForm} />
+                        <input type="checkbox" checked={userData.privateHouse} name='privateHouse' onChange={setPrivateHouse} />
                         <span className="lever"></span>
                       </label>
                     </div>
@@ -76,12 +103,12 @@ export default function Delivery({ products }) {
         <div className='delivery-order-block'>
           <div className='row'>
             <div className="form_radio_btn">
-              <input id="radio-1" type="radio" name="buyer_status" checked={userData.buyer_status = 'individual' ? true : false} onChange={changeForm} value='individual' />
+              <input id="radio-1" type="radio" name="buyer_status" checked={userData.buyer_status == 'individual' ? true : false} onChange={changeForm} value='individual' />
               <label htmlFor="radio-1">Физ. лицо</label>
             </div>
 
             <div className="form_radio_btn">
-              <input id="radio-2" type="radio" name="buyer_status" checked={userData.buyer_status = 'entity' ? true : false} onChange={changeForm} value='entity' />
+              <input id="radio-2" type="radio" name="buyer_status" checked={userData.buyer_status == 'entity' ? true : false} onChange={changeForm} value='entity' />
               <label htmlFor="radio-2">Юр. лицо</label>
             </div>
             <div className='row delivery-whom-data'>
@@ -107,8 +134,8 @@ export default function Delivery({ products }) {
               Нажимая кнопку «Подтвердить заказ», вы подтверждаете выбранный способ доставки и оплаты, ознакомились и согласны со всеми условиями покупки товаров на данном сайте, в том числе, но не ограничиваясь, со всей информацией в разделах «Клиентам» и «Помощь покупателям», принимаете соглашение на обработку персональных данных, соглашаетесь на использование простой электронной подписи при получении товара, а также соглашаетесь на получение новинок и акций.
               </div>    
               <div className='col s4'>
-                <div className='delivery-whom-button'>
-                  <span className='delivery-whom-button-text'>Перейти к оплате</span>
+                <div className='delivery-whom-button' onClick={createOrder}>
+                  <a className='delivery-whom-button-text'>Перейти к оплате</a>
                 </div>
 
               </div>

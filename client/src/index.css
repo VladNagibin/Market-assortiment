@@ -15,11 +15,77 @@ ul.hr li {
     /*padding: 3px;  Поля вокруг текста */
 }
 
-.childCategories {
-    position: absolute;
+.category-tree {
+    /* position: absolute; */
     z-index: 10;
-    opacity: 0.9;
-    border-radius: 10px;
+    margin-top: 2px;
+
+    /* opacity: 0.9; */
+
+}
+
+.childCategories-left {
+    background: #23415C;
+
+}
+
+.childCategories-right {
+    background: #EEEEEE;
+   /* Justify-content: center;
+    display: flex; */
+}
+
+.category {
+    /* width: 479px; */
+    /* height: 30px; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    /* identical to box height */
+    /* background-image: url(../public/arrow_forward.png); */
+    text-transform: uppercase;
+}
+.category:hover{
+    background: #2369A7;
+}
+
+.category-child {
+
+    height: 80px;
+    width: auto;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 20px;
+    border-radius: 5px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+}
+.category-child:hover{
+    background-color: #e1e1e1;
+}
+
+.category-href-text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+
+    color: #1A43AC;
+
 }
 
 .catalog-button {
@@ -45,9 +111,7 @@ ul.hr li {
     height: 30px;
 }
 
-.category {
-    border-radius: 10px;
-}
+
 
 .main-banners {
     border-radius: 20px;
@@ -264,20 +328,21 @@ nav {
     font-weight: 700;
     font-size: 18px;
     line-height: 23px;
-    text-align: center;
 
     color: #FFFFFF;
 }
-
+.barcode-name{
+    display: flex;
+}
 .barcode-detail-text {
-    margin-left: 10px;
+    margin-top: 12px;
 }
 
 .name-detail {
     font-weight: 700;
     font-size: 18px;
     line-height: 29px;
-
+    margin-left: 20px;
     color: #000000;
 }
 
@@ -601,7 +666,7 @@ nav {
     margin-top: 30px;
 }
 
-.delivery-whom-button-text{
+.delivery-whom-button-text {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -654,6 +719,16 @@ nav {
     color: #666;
 }
 
+.registation-form{
+    margin-top: 30px;
+    border-radius: 10px;
+    border: #606060 1px solid;
+}
+.adminCab-btn{
+    margin-right: 20px;
+    border-radius: 20px;
+    font-size: 15px;
+}
 /* .delivery-input {
     background: #EBEBEB;
     border-radius: 10px;

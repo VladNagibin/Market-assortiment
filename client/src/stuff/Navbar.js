@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
@@ -20,7 +20,7 @@ export default function Navbar() {
     }
     const findSmth = event => {
         if (event.keyCode === 13) {
-            navigate('/finder/'+finder)
+            navigate('/finder/' + finder)
         }
 
     }
@@ -39,8 +39,8 @@ export default function Navbar() {
         getCategories(0)
         var elems = document.querySelectorAll('.sidenav');
         window.M.Sidenav.init(elems, {});
-    },[])
-    
+    }, [])
+
     //<span className="badge nav-kek">{(auth.cart != null) ? auth.cart.length : 0}</span>
     function smallButtons() {
         if (auth.isAutheficated) {
@@ -60,6 +60,16 @@ export default function Navbar() {
                 </ul>
 
             )
+        }
+    }
+    function childCategories() {
+        if (drawedCategories.length) {
+            return (
+            <div className='container' onClick={clickCatalog}>
+                <div className='row category-tree'>
+                    <TreeOfCategories categories={drawedCategories} />
+                </div>
+            </div>)
         }
     }
     function checkAuth() {
@@ -103,7 +113,7 @@ export default function Navbar() {
                 <div className="nav-wrapper white">
                     <div className='row'>
                         <div className='col s6 m4 l3 xl2 offset-xl1'>
-                            <NavLink className="brand-logo left"  to='/'><img className='logo' alt='logo' src='/logo1.png'></img></NavLink>
+                            <NavLink className="brand-logo left" to='/'><img className='logo' alt='logo' src='/logo1.png'></img></NavLink>
                         </div>
                         <div className="col s3 m2 xl1">
                             <button className='btn waves-effect waves-light indigo darken-1 catalog-button' onClick={clickCatalog}>Каталог</button>
@@ -115,7 +125,7 @@ export default function Navbar() {
 
                                     <input id="search" type="search" placeholder='Поиск епту' required onKeyDown={findSmth} onChange={(event) => {
                                         setFinder(event.target.value)
-                                    }} value={finder}/>
+                                    }} value={finder} />
 
                                 </div>
                             </form>
@@ -129,11 +139,8 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-            <div className='container'>
-                <div className='row'>
-                    <TreeOfCategories categories={drawedCategories} />
-                </div>
-            </div>
+            {childCategories()}
+
         </>
     )
 

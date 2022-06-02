@@ -4,7 +4,13 @@ const schema = new Schema({
         type: String,
         required:true
     }, 
+    articul:{
+        type:String
+    },
     api_id:{
+        type:String
+    },
+    brand:{
         type:String
     },
     available:{
@@ -20,6 +26,12 @@ const schema = new Schema({
         required:true
     },
     parameters:{
+        type:Array
+    },
+    props:{
+        type:Array
+    },
+    availability:{
         type:Array
     },
     description:{

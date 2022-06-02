@@ -45,7 +45,7 @@ export default function ProductInCart({ product }) {
                     <span className="cart-sklad ">Наличие на складе</span>
                 </div>
                 <div className='cart-text'>
-                    <span className="cart-sklad ">{product.barcode}</span>
+                    <span className="cart-sklad ">{product.articul}</span>
                 </div>
             </div>
             <div className='col s4'>
@@ -80,3 +80,4 @@ export default function ProductInCart({ product }) {
         // </li>
     )
 }
+

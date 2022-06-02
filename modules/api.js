@@ -4,7 +4,7 @@ const request = require('request')
 
 function getSection(secId) {
     return new Promise((resolve, reject) => {
-        href = "http://www.galacentre.ru/api/v2/catalog/json/?section=" + secId + "&key=5a1e6024f2310649679acb5885c282e4"
+        href = "http://www.galacentre.ru/api/v2/catalog/json/?active=1&section=" + secId + "&key=5a1e6024f2310649679acb5885c282e4"
         request(href, async (err, res, body) => {
             if (err) {
                 reject(err)
@@ -34,6 +34,15 @@ function saveProduct(data) {
                 } else {
                     product = new Product({
                         api_id: data.id,
+                        articul: data.articul,
+                        brand:data.brand,
+                        availability:[
+                            {ekb:data.store_ekb},
+                            {msk:data.store_msk},
+                            {nsk:data.store_nsk},
+                            {vld:data.store_vld}
+                        ],
+                        props:data.props,
                         available: available,
                         name: data.name,
                         categoryId: data.section,
@@ -56,6 +65,7 @@ function saveProduct(data) {
         }
     })
 }
+
 
 async function saveCategories() {
     href = "http://www.galacentre.ru/api/v2/sections/json/?key=5a1e6024f2310649679acb5885c282e4"

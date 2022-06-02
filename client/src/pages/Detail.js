@@ -28,8 +28,8 @@ export default function Detail() {
       setQuantity(0)
       return
     }
-    var cartProd = await auth.cart.find((el) => el._id === product._id)
-    console.log(cartProd)
+    var cartProd = await auth.cart.find((el) => el._id === productId)
+    // console.log(productId)
     if (cartProd == undefined) {
       setQuantity(0)
     } else {
@@ -64,13 +64,15 @@ export default function Detail() {
     setProduct({
       name: data.name,
       price: data.price,
+      articul:data.articul,
       barcode: data.barcode,
       min_quantity: data.min_quantity,
       image: data.image,
       images: [...data.images, data.image],
-      parameters: data.parameters,
+      parameters: [...data.props,...data.parameters],
       description: data.description
     })
+    console.log([...data.props,data.parameters])
     setDisplayedPicture(data.image)
     getSimilar(data.name)
     getQuantity(data._id)
@@ -83,8 +85,8 @@ export default function Detail() {
     var firstWord = name.slice(0, name.indexOf(' '))
     findSimiar(firstWord).then(result => {
       setSimilarProducts(result)
-      console.log(firstWord)
-      console.log(result.length)
+      // console.log(firstWord)
+      // console.log(result.length)
     })
   }
   const pictOnClick = event => {
@@ -100,11 +102,11 @@ export default function Detail() {
 
   return (
     <div className='container detail'>
-      <div className='row'>
-        <div className='barcode-detail valign-wrapper col s2'>
-          <span className='barcode-detail-text'>{product.barcode}</span>
+      <div className='barcode-name'>
+        <div className='barcode-detail center-align'>
+          <div className='barcode-detail-text '>{product.articul}</div>
         </div>
-        <div className='name-detail col s7' >
+        <div className='name-detail' >
           <span>{product.name}</span>
         </div>
       </div>

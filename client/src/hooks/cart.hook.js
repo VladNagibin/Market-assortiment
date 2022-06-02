@@ -21,7 +21,9 @@ export const useCart = ()=>{
                 name:product.name,
                 min_quantity:product.min_quantity,
                 price:product.price,
-                quantity:quantity    
+                quantity:quantity,
+                articul:product.articul,
+                availability:product.availability    
             })
             updateCart(cartRed)
             
