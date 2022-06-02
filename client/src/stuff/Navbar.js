@@ -123,7 +123,7 @@ export default function Navbar() {
                             <form className='grey lighten-3 nav-search'>
                                 <div className="input-field">
 
-                                    <input id="search" type="search" placeholder='Поиск епту' required onKeyDown={findSmth} onChange={(event) => {
+                                    <input id="search" type="search" placeholder='Поиск' required onKeyDown={findSmth} onChange={(event) => {
                                         setFinder(event.target.value)
                                     }} value={finder} />
 

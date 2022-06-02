@@ -93,17 +93,37 @@ async function saveCategories() {
 
 
 }
+function setChildCategories() {
+    Category.find().lean().then(data => {
+        var vsego = data.length
+        var vypolneno = 0
+        data.forEach(element => {
+            var arr = [element]
+            getAllSections(arr).then(categories => {
+                ids = []
+                categories.forEach(element => {
+                    ids.push(element.Id)
+                })
+                Category.updateOne({ Id: element.Id }, { $set: { childCategories: ids } }).then(result => {
+                    vypolneno = vypolneno + 1
+                    console.log('Выполнено ' + vypolneno + ' из ' + vsego)
+                })
+            })
+        })
+    })
+}
+
 function getAllSections(sections) {
     return new Promise((resolve, reject) => {
         try {
             var arr = []
-            sections.forEach(element => {
+            sections.forEach(element => { //Получаем все дочерние категории
                 result = findSection(element.Id)
                 arr.push(result)
             })
             Promise.all(arr).then(value => {
                 var arrv2 = []
-                value.forEach(element => {
+                value.forEach(element => { //Получаем все дочерние категории по текущим дочерним категориям
                     var allChildren = getAllSections(element)
                     arrv2.push(allChildren)
                 })
@@ -111,7 +131,7 @@ function getAllSections(sections) {
                     value.forEach(element => {
                         sections = [...sections, ...element]
                     })
-                    resolve(sections)
+                    resolve(sections) //Соединяем получившиеся 2 массива и возвращаем
                 })
             })
 
@@ -124,13 +144,36 @@ function getAllSections(sections) {
 function findSection(id) {
     return new Promise((resolve, reject) => {
         try {
-            Category.find({ "parentId": id }).lean().then(result=>{
+            Category.find({ "parentId": id }).lean().then(result => {
                 resolve(result)
             })
-            
+
         } catch (e) {
             reject(e)
         }
     })
 }
-module.exports = { getSection, saveProduct, saveCategories, getAllSections }
+async function downloadProducts(){
+    categories = await Category.find({ "parentId": 0 }).lean()
+    var numOfCategories = categories.length
+    for (catCount = 0; catCount < numOfCategories; catCount++) {
+        products = await getSection(categories[catCount].Id)
+        var numOfProducts = products.length
+        for (prodCount = 0; prodCount < numOfProducts; prodCount = prodCount + 8) {
+            var donw1 = saveProduct(products[prodCount])
+            var donw2 = saveProduct(products[prodCount + 1])
+            var donw3 = saveProduct(products[prodCount + 2])
+            var donw4 = saveProduct(products[prodCount + 3])
+            var donw5 = saveProduct(products[prodCount + 4])
+            var donw6 = saveProduct(products[prodCount + 5])
+            var donw7 = saveProduct(products[prodCount + 6])
+            var donw8 = saveProduct(products[prodCount + 7])
+            await Promise.all([donw1, donw2, donw3, donw4, donw5, donw6, donw7, donw8])
+            console.clear()
+            console.log('Category: ' + catCount + ' of ' + numOfCategories + ' products saved from ' + prodCount + ' to ' + (prodCount + 7) + ' of ' + numOfProducts)
+
+        }
+    }
+
+}
+module.exports = { getSection, saveProduct, saveCategories, getAllSections, setChildCategories,downloadProducts }

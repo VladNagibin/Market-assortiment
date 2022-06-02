@@ -301,69 +301,96 @@ router.post('/downloadProducts', (async (req, res) => {
 }))
 
 router.post('/updatePrices', (req, res) => {
-    Deleted = 0
-    Changed = 0
-    manipulations = []
-    Category.find({ "parentId": 0 }).lean().then(categories =>{
-        categories.forEach(category=>{
-            console.log("Cопоставление категории "+category.name)
-            manipulation = api.getSection(category.Id).then(productsAPI=>{
+
+    Category.find({ "parentId": 0 }).lean().then(categories => {
+        updatePrices(categories).then(data=>{
+            res.status(200).json(data)
+        },err=>{
+            res.status(400).json({
+                message:err
+            })
+        })
+    })
+
+})
+function updatePrices(categories) {
+    return new Promise(async (resolve, reject) => {
+        var Deleted = 0
+        var Changed = 0
+        var Added = 0
+        manipulations = []
+        await categories.forEach(category => {
+            console.log("Cопоставление категории " + category.name)
+            manipulation = api.getSection(category.Id).then(productsAPI => {
                 idArray = []
-                productsAPI.forEach(elem=>{
+                productsAPI.forEach(elem => {
                     idArray.push(elem.id)
                 })
                 //Удаляем неактивные и которых нет в галацентре
-                Product.deleteMany({$and:[{api_id:{$nin:idArray}},{categoryId: { $in: category.childCategories}}]}).then(deleted=>{
-                    Deleted = Deleted + deleted.lenght
-                    console.log("Удалено "+deleted.lenght+" элементов")
+                Product.deleteMany({ $and: [{ api_id: { $nin: idArray } }, { categoryId: { $in: category.childCategories } }] }).then(deleted => {
+                    Deleted = Deleted + deleted.deletedCount
+                    console.log("Удалено " + deleted.deletedCount + " элементов")
                 })
-                //Сопоставляем цены
+                
                 Product.find({
-                    api_id:{
-                        $in:idArray
+                    api_id: {
+                        $in: idArray
                     }
-                }).then(productsDB=>{
+                }).then(productsDB => {
                     a = 0
-                    productsDB.forEach(elem=>{
-                        if(elem.api_id==productsAPI[a].id){
-                            if(elem.price!=productsAPI[a].price_base*1.1){
-                                elem.price = productsAPI[a].price_base*1.1
+                    //Сопоставляем цены
+                    productsDB.forEach(elem => {
+                        if (elem.api_id == productsAPI[a].id) {
+                            var newElemPrice = Math.round(productsAPI[a].price_base * 1.1 * 100) / 100
+                            if (elem.price != newElemPrice) {
+                                elem.price = newElemPrice
                                 elem.save()
                                 Changed = Changed + 1
                             }
-                        }else{
-                            productsAPI.find(el=>el.id==elem.api_id).then(match=>{
-                                if(elem.price!=match.price_base*1.1){
-                                    elem.price = match.price_base*1.1
+                        } else {
+                            var finder = new Promise(async (res, rej) => {
+                                try {
+                                    match = await productsAPI.find(el => el.id == elem.api_id)
+                                    res(match)
+                                } catch (e) {
+                                    rej(e)
+                                }
+                            })
+                            finder.then(match => {
+                                var newElemPrice = Math.round(match.price_base * 1.1 * 100) / 100
+                                if (elem.price == newElemPrice) {
+                                    elem.price = newElemPrice
                                     Changed = Changed + 1
                                     elem.save()
                                 }
+                            }, rej => {
+                                reject(rej)
                             })
                         }
                         a++
                     })
-                    console.log("Категория "+category.name+" сопоставлена")
-
+                    //Добавляем новые
+                    productsAPI.forEach(elemAPI => {
+                        if(productsDB.find(elDB=>elDB.api_id==elemAPI.id)==undefined){
+                            api.saveProduct(elemAPI)
+                            Added+=1
+                        }
+                    })
+                    console.log("Категория " + category.name + " сопоставлена")
+                    
                 })
-
+                
             })
             manipulations.push(manipulation)
-            Promise.all(manipulations).then(data=>{
-                res.status(200).json({
-                    Changed:Changed,
-                    Deleted:Deleted
-                })
+        })
+        Promise.all(manipulations).then(data=>{
+            resolve({
+                Deleted,
+                Changed,
+                Added
             })
-            // productsDB = Product.find({ categoryId: { $in: category.childCategories}})
-            // Promise.all([productsAPI,productsDB]).then(data=>{
-            //     productsAPI = data[0]
-            //     productsDB = data[1]
-
-            // })
         })
         
     })
-
-})
-
+}
 module.exports = router

@@ -41,7 +41,7 @@ export default function Orders({ id }) {
             }
             {
                 drawedOrders.map(order => {
-                    return <Order order={order} />
+                    return <Order order={order} key={order._id} />
                 })
             }
             <ReactPaginate
