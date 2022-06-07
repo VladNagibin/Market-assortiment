@@ -11,7 +11,7 @@ const Product = require('../models/Product')
 const api = require('../modules/api')
 router.post('/login', logIn)
 router.post('/checkAuth', checkToken)
-
+priceUpdating = undefined
 router.post('/registration', (async (req, res) => {
 
     var hashPassword = (await bCrypt.hash(req.body.password, 10))
@@ -300,19 +300,60 @@ router.post('/downloadProducts', (async (req, res) => {
 
 }))
 
-router.post('/updatePrices', (req, res) => {
+router.post('/updatePrices', async (req, res) => {
+    data = await updatePricesAllCategories()
+    res.status(200).json(data)
+})
 
+router.post('/turnOnUpdating', (req, res) => {
+    if (priceUpdating == undefined) {
+        priceUpdating = setInterval(() => {
+            //console.log('Jokes')
+            updatePricesAllCategories()
+        }, 1000*60*60*24)
+        res.status(200).json({
+            message: 'обновление цен включено'
+        })
+    } else {
+        res.status(301).json({
+            message:'обновление цен и так включено'
+        })
+    }
+})
+router.post('/turnOffUpdating', (req, res) => {
+    if (priceUpdating == undefined) {
+        res.status(301).json({
+            message: 'обновление цен и так выключено'
+        })
+    } else {
+        clearInterval(priceUpdating)
+        priceUpdating = undefined
+        res.status(200).json({
+            message: 'обновление цен выключено'
+        })
+    }
+})
+
+router.get('/howIsUpdating', (req, res) => {
+    if (priceUpdating == undefined) {
+        res.status(200).json({
+            turnedOn: false
+        })
+    } else {
+        res.status(200).json({
+            turnedOn: true
+        })
+    }
+})
+function updatePricesAllCategories() {
     Category.find({ "parentId": 0 }).lean().then(categories => {
-        updatePrices(categories).then(data=>{
-            res.status(200).json(data)
-        },err=>{
-            res.status(400).json({
-                message:err
-            })
+        updatePrices(categories).then(data => {
+            return data
+        }, err => {
+            return err
         })
     })
-
-})
+}
 function updatePrices(categories) {
     return new Promise(async (resolve, reject) => {
         var Deleted = 0
@@ -331,7 +372,7 @@ function updatePrices(categories) {
                     Deleted = Deleted + deleted.deletedCount
                     console.log("Удалено " + deleted.deletedCount + " элементов")
                 })
-                
+
                 Product.find({
                     api_id: {
                         $in: idArray
@@ -371,26 +412,26 @@ function updatePrices(categories) {
                     })
                     //Добавляем новые
                     productsAPI.forEach(elemAPI => {
-                        if(productsDB.find(elDB=>elDB.api_id==elemAPI.id)==undefined){
+                        if (productsDB.find(elDB => elDB.api_id == elemAPI.id) == undefined) {
                             api.saveProduct(elemAPI)
-                            Added+=1
+                            Added += 1
                         }
                     })
                     console.log("Категория " + category.name + " сопоставлена")
-                    
+
                 })
-                
+
             })
             manipulations.push(manipulation)
         })
-        Promise.all(manipulations).then(data=>{
+        Promise.all(manipulations).then(data => {
             resolve({
                 Deleted,
                 Changed,
                 Added
             })
         })
-        
+
     })
 }
 module.exports = router
