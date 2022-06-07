@@ -61,7 +61,7 @@ export default function AdminCab() {
         </div>
       </div>
       <div>
-        <Orders id='all' />
+        <Orders id='all' admin={true}/>
       </div>
     </div>
   )

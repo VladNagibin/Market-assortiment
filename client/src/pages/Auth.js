@@ -29,10 +29,11 @@ export default function Auth() {
     try {
       const data = await request('/api/logIn', "POST", { ...form })
       if (data.token) {
+        navigate('/')
         console.log(data.userId)
         auth.login(data.token, data.userId)
         message("Вход выполнен")
-        navigate('/auth')
+        
       }
     } catch (e) {
       message(e.message)

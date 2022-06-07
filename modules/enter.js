@@ -6,10 +6,10 @@ const { jwtSecret } = require('../config/app')
 const logIn = (async (req, res) => {
     const { email, password } = req.body
     User.findOne({ mail: email })
-        .exec()
         .then((user => {
             if (!user) {
-                res.status(401).json({ message: 'User does not exist' })
+                res.status(401).json({ message: 'Пользователь не найден' })
+                return
             }
             var isValid
             try {
@@ -18,17 +18,18 @@ const logIn = (async (req, res) => {
                 res.status(401).json({ message: 'Пароль невалидный' })
             }
             if (isValid) {
-                const token = jwt.sign(user._id.toString(), jwtSecret)
+                var id = user._id.toString()
+                const token = jwt.sign(id, jwtSecret)
                 //res.cookie('UserHash',token.toString())
                 res.status(200).json({
                     message: 'success',
                     token: token,
-                    userId: user.id
+                    userId: id
                 })
                 //res.json({ token })
             }
             else {
-                res.status(401).json({ message: 'invalid password' })
+                res.status(401).json({ message: 'Пароль неверный' })
             }
 
         }))

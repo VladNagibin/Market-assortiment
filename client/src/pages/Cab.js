@@ -38,7 +38,7 @@ export default function Cab() {
       <h1>Кабинет</h1>
       <label>{user.name}</label>
       <label>{user.mail}</label>
-      <Orders id={auth.userId}/>
+      <Orders id={auth.userId} admin={false}/>
     </div>
   )
 }

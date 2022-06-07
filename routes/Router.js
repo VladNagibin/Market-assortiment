@@ -382,7 +382,7 @@ function updatePrices(categories) {
                     //Сопоставляем цены
                     productsDB.forEach(elem => {
                         if (elem.api_id == productsAPI[a].id) {
-                            var newElemPrice = Math.round(productsAPI[a].price_base * 1.1 * 100) / 100
+                            var newElemPrice = (Math.round(productsAPI[a].price_base * 1.1 * 100) / 100).toFixed(2)
                             if (elem.price != newElemPrice) {
                                 elem.price = newElemPrice
                                 elem.save()
@@ -398,7 +398,7 @@ function updatePrices(categories) {
                                 }
                             })
                             finder.then(match => {
-                                var newElemPrice = Math.round(match.price_base * 1.1 * 100) / 100
+                                var newElemPrice = (Math.round(match.price_base * 1.1 * 100) / 100).toFixed(2)
                                 if (elem.price == newElemPrice) {
                                     elem.price = newElemPrice
                                     Changed = Changed + 1

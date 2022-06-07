@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate'
 import { useHttp } from '../hooks/http.hook'
 import Order from './Order'
 
-export default function Orders({ id }) {
+export default function Orders({ id,admin }) {
     const { request, loading } = useHttp()
     const [orders, setOrders] = useState([])
     const [drawedOrders, setDrawedOrders] = useState([])
@@ -41,7 +41,7 @@ export default function Orders({ id }) {
             }
             {
                 drawedOrders.map(order => {
-                    return <Order order={order} key={order._id} />
+                    return <Order order={order} key={order._id} admin={admin}/>
                 })
             }
             <ReactPaginate

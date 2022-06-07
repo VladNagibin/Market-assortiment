@@ -1,7 +1,15 @@
 import React from 'react'
 
-export default function Order({ order }) {
+export default function Order({ order,admin }) {
   var amount = 0
+  function acceptButton(){
+    if(admin){
+      return <a className="waves-effect waves-light btn-small indigo darken-3 adminCab-btn">Подтвердить</a>
+
+    }else{
+      return
+    }
+  }
   return (
     <div className='row'>
       <div className='col s4'>
@@ -12,7 +20,8 @@ export default function Order({ order }) {
         </div>
         
         <a className="waves-effect waves-light btn-small indigo darken-3 adminCab-btn">Открыть</a>
-        <a className="waves-effect waves-light btn-small indigo darken-3 adminCab-btn">Подтвердить</a>
+        {acceptButton()}
+        
       </div>
       <div className='col s8'>
         <div className="collection">
