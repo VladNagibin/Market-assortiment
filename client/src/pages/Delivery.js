@@ -69,18 +69,18 @@ export default function Delivery() {
                 </div>
                 <div className='row'>
                   <div className='col s6 delivery-input'>
-                    <input id="flat" name='flat' type="search" placeholder='Квартира' required onChange={changeForm} value={userData.flat} />
+                    <input id="flat" name='flat' type="search" placeholder='Квартира' required disabled={userData.privateHouse} onChange={changeForm} value={userData.flat} />
                   </div>
                   <div className='col s6 delivery-input'>
-                    <input id="intercom" name='intercom' type="search" placeholder='Домофон' required onChange={changeForm} value={userData.intercom} />
+                    <input id="intercom" name='intercom' type="search" placeholder='Домофон' required disabled={userData.privateHouse} onChange={changeForm} value={userData.intercom} />
                   </div>
                 </div>
                 <div className='row'>
                   <div className='col s6 delivery-input'>
-                    <input id="enterance" name='enterance' type="search" placeholder='Подъезд' required onChange={changeForm} value={userData.enterance} />
+                    <input id="enterance" name='enterance' type="search" placeholder='Подъезд' required disabled={userData.privateHouse} onChange={changeForm} value={userData.enterance} />
                   </div>
                   <div className='col s6 delivery-input'>
-                    <input id="floor" name='floor' type="search" placeholder='Этаж' required onChange={changeForm} value={userData.floor} />
+                    <input id="floor" name='floor' type="search" placeholder='Этаж' required disabled={userData.privateHouse} onChange={changeForm} value={userData.floor} />
                   </div>
                 </div>
               </div>

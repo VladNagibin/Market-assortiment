@@ -116,7 +116,14 @@ ul.hr li {
 .main-banners {
     border-radius: 20px;
 }
-
+.banners{
+    display: flex;
+    justify-content: space-around;
+    /* flex-wrap: wrap; */
+}
+.banner{
+    padding: 10px;
+}
 .logo {
     margin-top: 10px;
 }

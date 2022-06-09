@@ -111,15 +111,15 @@ export default function Detail() {
         </div>
       </div>
       <div className='row'>
-        <div className='col s2'>
+        <div className='col s4 l2'>
           {product.images.map(elem => {
             return (<img key={elem} className='img-detail' src={elem} onClick={pictOnClick} />)
           })}
         </div>
-        <div className='col s5'>
+        <div className='col s8 l5'>
           <img className='detail-main-pic' src={displayedPicture} />
         </div>
-        <div className='col s5 stats-detail'>
+        <div className='col s12 l5 stats-detail'>
           <div className='name-stat-detail'>
             <span >Технические характеристики</span>
           </div>
@@ -152,10 +152,10 @@ export default function Detail() {
       <span className='detail-opisanie'>Описание</span>
       <div className='row detail-desc'>
 
-        <div className='col s5'>
+        <div className='col s12 l5'>
           <span>{product.description}</span>
         </div>
-        <div className='col s5 offset-s2 detail-desc-info'>
+        <div className='col s12 l5 offset-l2 detail-desc-info'>
           <div className='desc-info'>Товары представлены в ассортименте, выбор цветов или моделей не предоставляется. На фотографиях могут быть представлены не все варианты.</div>
         </div>
       </div>

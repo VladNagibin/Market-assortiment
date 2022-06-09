@@ -33,8 +33,8 @@ export default function Main() {
       <div className='row '>
         <h1 className='headers-main'>Товары по категориям</h1>
       </div>
-      <div className='row'>
-        <div className='col s3'>
+      <div className='banners'>
+        <div className='banner'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable '>
               <NavLink to='/catalog/21'><img src='Sad_i_dacha_category.png' alt='banner-sad'></img></NavLink>
@@ -42,7 +42,7 @@ export default function Main() {
 
           </div>
         </div>
-        <div className='col s5'>
+        <div className='banner'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable '>
               <NavLink to='/catalog/141'><img src='kancelarya_category.png' alt='banner-kancelarya'></img></NavLink>
@@ -50,7 +50,7 @@ export default function Main() {
 
           </div>
         </div>
-        <div className='col s4'>
+        <div className='banner'>
           <div className='card main-banners'>
             <div className='card-image  main-banners hoverable'>
               <NavLink to='/catalog/114'><img src='himiya_category.png' alt='banner-himiya'></img></NavLink>
@@ -59,15 +59,15 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <div className='row'>
-        <div className='col s4'>
+      <div className='banners'>
+        <div className='banner'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable'>
               <NavLink to='/catalog/22'><img src='dlya_detei_category.png' alt='banner-dlya_detei'></img></NavLink>
             </div>
           </div>
         </div>
-        <div className='col s8'>
+        <div className='banner'>
           <div className='card main-banners'>
             <div className='card-image main-banners hoverable'>
               <NavLink to='/catalog/130'><img src='tekstil_category.png'  alt='banner-tekstil'></img></NavLink>
@@ -82,12 +82,12 @@ export default function Main() {
         <ProductSlider products={popularProducts}/>
       </div>
       <div className='row'>
-        <div className='col s8 offset-s2 podpiska-rectangle'>
+        <div className='col l8 offset-l2 s12 podpiska-rectangle'>
           <div className='podpiska-div'>
             <span className='white-text podpiska-text'>Будьте в курсе нашей актуальной информации!</span>
           </div>
 
-          <div className="input-field col s12 l7 xl8">
+          <div className="input-field col s12 xl8">
             <input placeholder="moshnayaPochta@mail.ru" id="mail" type="text" className="validate  white" />
           </div>
           <div className='col s12 l5 xl4'>

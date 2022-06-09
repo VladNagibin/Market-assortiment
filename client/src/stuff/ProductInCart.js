@@ -30,14 +30,14 @@ export default function ProductInCart({ product }) {
     }
     return (
         <div className='row product-in-cart'>
-            <div className='col s2'>
+            <div className='col l2 s4'>
                 <div className='row'>
                     <div className='col s10'>
                         <Link to={'/detail/' + product._id}><img src={product.image} alt={product._id} className="cart-pic" /></Link>
                     </div>
                 </div>
             </div>
-            <div className='col s6'>
+            <div className='col l6 s8'>
                 <div className='cart-text'>
                     <span className="cart-name">{product.name}</span>
                 </div>
@@ -48,7 +48,7 @@ export default function ProductInCart({ product }) {
                     <span className="cart-sklad ">{product.articul}</span>
                 </div>
             </div>
-            <div className='col s4'>
+            <div className='col l4 s12'>
                 <div className="card-action flex-container-cart">
                     <div className='price-cart center-align'>
                         <p className='price-text'>{product.price + 'P'}</p>

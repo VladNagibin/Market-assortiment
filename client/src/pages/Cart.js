@@ -22,7 +22,7 @@ export default function Cart() {
     return (
         <div className='container cart-text-all'>
             <div className='cart-header'>
-                <span >В корзине {products.length} товаров</span>
+                <span >В корзине {products.length} товаров(а)</span>
             </div>
 
             <div className='row'>
@@ -33,7 +33,7 @@ export default function Cart() {
 
             </div>
             <div className='row'>
-                <div className='col s6 cart-price'>
+                <div className='col l6 s12 cart-price'>
                     <div className='row cart-price-summ'>
                         <div className='col s4 cart-price-sp'>
                             <span>Итого:</span>
@@ -56,9 +56,9 @@ export default function Cart() {
                         <span className='cart-price-info'>Способы и время доставки можно выбрать при оформлении заказа</span>
                     </div>
                 </div>
-                <div className='col s6'>
+                <div className='col l6 s12'>
                     <div className='row'>
-                        <div className='col s8 offset-s4'>
+                        <div className='col l8 offset-l4 s12'>
                             <div className='row'>
                                 <Promocode getPromocode={getPromocode} />
                             </div>
