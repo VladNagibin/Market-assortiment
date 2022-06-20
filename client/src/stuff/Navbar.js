@@ -59,7 +59,7 @@ export default function Navbar() {
 
                 <ul className="sidenav" id="mobile-demo">
                     <li><NavLink className='black-text btn white catalog-button' to={'/auth'}>Войти</NavLink></li>
-                    <li><NavLink className='black-text btn white catalog-button' to={'/auth'}>Зарегистрироваться</NavLink></li>
+                    <li><NavLink className='black-text btn white catalog-button' to={'/registration'}>Зарегистрироваться</NavLink></li>
                 </ul>
 
             )
@@ -103,7 +103,7 @@ export default function Navbar() {
                         <NavLink className='black-text btn white catalog-button nav-butt' to={'/auth'}>Войти</NavLink>
                     </div>
                     <div className='col s4 l2 nav-buttons'>
-                        <NavLink className='black-text btn white catalog-button' to={'/auth'}>Зарегистрироваться</NavLink>
+                        <NavLink className='black-text btn white catalog-button' to={'/registration'}>Зарегистрироваться</NavLink>
                     </div>
                 </>
             )

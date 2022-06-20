@@ -37,7 +37,7 @@ export default function Cab() {
     <div>
       <h1>Кабинет</h1>
       <div className='row'>
-        <div className='col s4'>
+        <div className='col l4 s12'>
           <div className="collection">
             <a href="#!" className="collection-item indigo lighten-4 black-text"><span className='badge black-text'>{user.name}</span>Имя</a>
             <a href="#!" className="collection-item indigo lighten-4 black-text"><span className='badge black-text'>{user.mail}</span>E-mail</a>

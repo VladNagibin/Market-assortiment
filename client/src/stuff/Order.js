@@ -12,7 +12,7 @@ export default function Order({ order,admin }) {
   }
   return (
     <div className='row'>
-      <div className='col s4'>
+      <div className='col l4 s12'>
         <div className="collection">
           <a href="#!" className="collection-item indigo lighten-5 black-text"><span className='badge black-text'>{order.user_data.fio}</span>Покупатель</a>
           <a href="#!" className="collection-item indigo lighten-5 black-text"><span className='badge black-text'>{order.order_date}</span>Дата заказа</a>
@@ -23,7 +23,7 @@ export default function Order({ order,admin }) {
         {acceptButton()}
         
       </div>
-      <div className='col s8'>
+      <div className='col l8 s12'>
         <div className="collection">
           {
             order.products.map(product => {

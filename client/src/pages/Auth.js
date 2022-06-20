@@ -45,6 +45,7 @@ export default function Auth() {
   return (
     <div className='container'>
       <div className='row'>
+        <h1>Вход</h1>
         <div className='col s8 offset-s2 registation-form indigo lighten-5'>
           <label htmlFor='email'>Почта</label>
           <input type="text" name="email" id='email' onChange={changeForm}></input>
