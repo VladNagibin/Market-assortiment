@@ -68,6 +68,8 @@ export default function Catalog() {
                 <ReactPaginate
                     onPageChange={pageClickHandler}
                     pageCount={pageCount}
+                    nextLabel = ">"
+                    previousLabel = "<"
                     renderOnZeroPageCount={null}
                     activeClassName="active blue"
                     className='col s12 center-align pagination'

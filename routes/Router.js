@@ -310,8 +310,10 @@ router.post('/downloadProducts', (async (req, res) => {
 }))
 
 router.post('/updatePrices', async (req, res) => {
-    data = await updatePricesAllCategories()
-    res.status(200).json(data)
+    updatePricesAllCategories()
+    res.status(200).json({
+        success:true
+    })
 })
 
 router.post('/turnOnUpdating', (req, res) => {

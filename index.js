@@ -4,6 +4,7 @@ const Router = require('./routes/Router')
 const Cookies = require('cookies')
 const path = require('path')
 const app = express()
+require('dotenv').config()
 
 const PORT =process.env.NODE_ENV ==='production'?80:5000
 app.use(express.json({extended:true}))
@@ -20,7 +21,7 @@ app.use(Cookies)
 
 async function start(){
     try{
-        await mongoose.connect('mongodb+srv://Vlad:123@cluster0.zy9vv.mongodb.net/Database')
+        await mongoose.connect(process.env.DB_CONN)
         app.listen(PORT,()=>{
             console.log('server is online on '+PORT+')')
         })

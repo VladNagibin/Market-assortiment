@@ -4,7 +4,7 @@ const request = require('request')
 
 function getSection(secId) {
     return new Promise((resolve, reject) => {
-        href = "http://www.galacentre.ru/api/v2/catalog/json/?active=1&section=" + secId + "&key=5a1e6024f2310649679acb5885c282e4"
+        href = "http://www.galacentre.ru/api/v2/catalog/json/?active=1&section=" + secId + "&key="+process.env.TOKEN
         request(href, async (err, res, body) => {
             if (err) {
                 reject(err)
@@ -68,7 +68,7 @@ function saveProduct(data) {
 
 
 async function saveCategories() {
-    href = "http://www.galacentre.ru/api/v2/sections/json/?key=5a1e6024f2310649679acb5885c282e4"
+    href = "http://www.galacentre.ru/api/v2/sections/json/?key="+process.env.TOKEN
     request(href, (err, res, body) => {
         if (err) {
             console.log(err)
