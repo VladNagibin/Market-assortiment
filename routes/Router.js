@@ -255,6 +255,15 @@ router.get('/allOrders', (req, res) => {
     }
 
 })
+
+router.post('/fixPrices',(req,res)=>{
+    Product.find().then(allPrices=>{
+        allPrices.forEach(product=>{
+            product.price = product.price.toFixed(2)
+            product.save()
+        })
+    })
+})
 // router.post('/setChildCategories',(req,res)=>{
 //     Category.find().lean().then(data=>{
 //         var vsego = data.length
@@ -301,8 +310,10 @@ router.post('/downloadProducts', (async (req, res) => {
 }))
 
 router.post('/updatePrices', async (req, res) => {
-    data = await updatePricesAllCategories()
-    res.status(200).json(data)
+    updatePricesAllCategories()
+    res.status(200).json({
+        success:true
+    })
 })
 
 router.post('/turnOnUpdating', (req, res) => {

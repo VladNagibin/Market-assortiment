@@ -9,6 +9,7 @@ import Cart from './pages/Cart'
 import Finder from './pages/Finder'
 import Delivery from './pages/Delivery'
 import AdminCab from './pages/AdminCab'
+import Registration from './pages/Registration'
 export const useRoutes = isAunteficated => {
     if (isAunteficated) {
         return (
@@ -20,7 +21,7 @@ export const useRoutes = isAunteficated => {
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
                 <Route path='/finder/:text' element={<Finder />} />
-                <Route path='/adminCab' element={<AdminCab />} />
+                {/* <Route path='/adminCab' element={<AdminCab />} /> */}
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>
         )
@@ -29,11 +30,12 @@ export const useRoutes = isAunteficated => {
             <Routes>
                 <Route path='/' exact element={<Main />} />
                 <Route path='/auth' exact element={<Auth />} />
+                <Route path='/registration' exact element={<Registration />} />
                 <Route path='/delivery' exact element={<Delivery />} />
                 <Route path='/detail/:id' element={<Detail />} />
                 <Route path='/catalog/:id' element={<Catalog />} />
                 <Route path='/finder/:text' element={<Finder />} />
-                <Route path='/adminCab' element={<AdminCab />} />
+                {/* <Route path='/adminCab' element={<AdminCab />} /> */}
                 <Route path="*" element={<Navigate replace to="/" />}  />
             </Routes>)
     }

@@ -9,7 +9,7 @@ export default function AdminCab() {
   const message = useMessage()
   async function updatePrices() {
     var data = await request('/api/updatePrices', 'POST')
-    message('Удалено:' + data.Deleted + 'Изменено цен:' + data.Changed)
+    message('Обновление цен выполнено')
   }
   async function checkPriceUpdate(){
     var data = await request('/api/howIsUpdating')
@@ -38,7 +38,7 @@ export default function AdminCab() {
     }
   }
   return (
-    <div className='container'>
+    <div >
       <div className='row'>
         <h3>Панель управления</h3>
         <div className='col s12'>

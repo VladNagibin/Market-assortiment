@@ -118,6 +118,7 @@ ul.hr li {
 }
 .banners{
     display: flex;
+    /* flex-wrap: wrap; */
     justify-content: space-around;
     /* flex-wrap: wrap; */
 }
