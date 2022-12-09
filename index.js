@@ -4,6 +4,7 @@ const Router = require('./routes/Router')
 const Cookies = require('cookies')
 const path = require('path')
 const app = express()
+const https = require('https')
 
 const PORT =process.env.NODE_ENV ==='production'?80:5000
 app.use(express.json({extended:true}))
@@ -21,6 +22,7 @@ app.use(Cookies)
 async function start(){
     try{
         await mongoose.connect('mongodb+srv://Vlad:123@cluster0.zy9vv.mongodb.net/Database')
+        await https.createServer(credentials,app).listen(PORT)
         app.listen(PORT,()=>{
             console.log('server is online on '+PORT+')')
         })
