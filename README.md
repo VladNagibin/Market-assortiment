@@ -7,5 +7,4 @@
 <li>Additional pages like about us, info and other</li>
 <li>Fully adaptive layout in main page</li> 
 <li>Profile redesign and order page</li>
-<li>Https</li>
 </ol>
